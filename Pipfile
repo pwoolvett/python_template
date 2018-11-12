@@ -1,0 +1,41 @@
+[[source]]
+name = "pypi"
+verify_ssl = true
+url = "https://pypi.org/simple"
+
+[dev-packages]
+pytest-cov = "*"
+coverage = "*"
+tox = "*"
+toml = "*"
+sphinx = "*"
+pytest-mock = "*"
+sphinx-rtd-theme = "*"
+"pytest-pep8" = "*"
+"flake8" = "*"
+black = "*"
+pytest-black = "*"
+sphinx-autobuild = "*"
+coverage-badge = "*"
+anybadge = "*"
+gitpython = "*"
+docker-compose = "*"
+pytest = "*"
+sphinx-autodoc-typehints = "*"
+behave = "*"
+
+[packages]
+fire = "*"
+autologging = "*"
+xlrd = "*"
+tqdm = "*"
+
+logzero = "*"
+"4b5d72f" = {file = "https://github.com/theskumar/python-dotenv/archive/master.zip"}
+sphinx-autodoc-typehints = {git = "https://github.com/agronholm/sphinx-autodoc-typehints"}
+
+[requires]
+python_version = "3.6"
+
+[pipenv]
+allow_prereleases = true
