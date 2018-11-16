@@ -13,8 +13,6 @@ import os
 
 import pytest
 
-from tests.unit.akeneo_mock import AkeneoMock
-
 
 def pytest_addoption(parser):
     """Adds a `--runslow` command line option to control skipping of
@@ -167,6 +165,5 @@ def pytest_configure(config):
 
 
 def pytest_unconfigure(config):
-    os.environ["DOTENV_LOCATION"] = "babel_tower/.env"
 
     return config

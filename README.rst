@@ -1,3 +1,12 @@
+.. image:: https://circleci.com/gh/pwoolvett/python_template.svg?style=shield
+    :target: https://circleci.com/gh/pwoolvett/python_template
+
+.. image:: https://img.shields.io/github/repo-size/badges/shields.svg   :alt: GitHub repo size in bytes
+
+.. image:: https://img.shields.io/github/license/mashape/apistatus.svg   :alt: GitHub
+
+.. image:: https://img.shields.io/pypi/pyversions/Django.svg   :alt: PyPI - Python Version
+
 1. clone
 2. refactor "package" folder
 3. enjoy!
