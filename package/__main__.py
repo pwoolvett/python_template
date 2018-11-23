@@ -1,3 +1,11 @@
-from package.meta import __version__
+#! /usr/bin/env python
+# -*- coding: utf-8 -*-
+"""
+    
+"""
 
-__all__ = ["__version__"]
+import fire
+
+from package.scripts import *
+
+fire.Fire()

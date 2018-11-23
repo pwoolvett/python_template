@@ -383,3 +383,7 @@ pip-selfcheck.json
 # ctags stuff
 
 .tags*
+
+# backup stuff
+
+.bkp

@@ -1,18 +1,43 @@
+# coding=utf-8
 """Package documentation
 
-.. versionadded:: 0.0.1
+.. versionadded:: 0.1.0
    Initial version.
 
-.. versionadded:: 0.0.2
-    Added something.
-
 """
-__version__ = "0.0.1"
-__release__ = "pre-alpha"
-__project_name__ = __package__
-__maintainer__ = __author_name__ = "Pablo Woolvett"
-__maintainer_email__ = __author_email__ = "pablowoolvett@gmail.com"
-__author__ = f"{__author_name__} <{__author_email__}>"
-__license__ = "MIT"
-__copyright__ = __author_name__
-__url__ = "https://github.com/pwoolvett/python-template"
+from package import _logging_ as logging
+
+
+class Metadata:
+
+    def __init__(self):
+        self.pyproject_ = None
+
+    @property
+    def pyproject(self):
+        if not self.pyproject_:
+            import toml
+            import os
+            dir_ = f'{os.path.dirname(os.path.abspath(__file__))}'
+            fp = f'{dir_}/../pyproject.toml'
+            self.pyproject_ = toml.load(fp)['tool']['poetry']
+
+        return self.pyproject_
+
+    def __getattr__(self, attr):
+        val = self.pyproject.get(attr)
+        if not val:
+            raise AttributeError(f"package '{__package__}' has no attribute '{attr}'")
+        return val
+
+    __getitem__ = __getattr__
+
+
+__meta__ = Metadata()
+
+
+def __getattr__(attr_name: str) -> str:
+    return __meta__[attr_name.replace('__', '')]
+
+
+logger = logging.get_logger()
