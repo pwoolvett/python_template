@@ -9,7 +9,6 @@ from package import _logging_ as logging
 
 
 class Metadata:
-
     def __init__(self):
         self.pyproject_ = None
 
@@ -18,9 +17,10 @@ class Metadata:
         if not self.pyproject_:
             import toml
             import os
-            dir_ = f'{os.path.dirname(os.path.abspath(__file__))}'
-            fp = f'{dir_}/../pyproject.toml'
-            self.pyproject_ = toml.load(fp)['tool']['poetry']
+
+            dir_ = f"{os.path.dirname(os.path.abspath(__file__))}"
+            fp = f"{dir_}/../pyproject.toml"
+            self.pyproject_ = toml.load(fp)["tool"]["poetry"]
 
         return self.pyproject_
 
@@ -37,7 +37,7 @@ __meta__ = Metadata()
 
 
 def __getattr__(attr_name: str) -> str:
-    return __meta__[attr_name.replace('__', '')]
+    return __meta__[attr_name.replace("__", "")]
 
 
 logger = logging.get_logger()

@@ -12,14 +12,14 @@ from package import (
     __release__,
     __project_name__,
     __author__,
-    __copyright__,
+    # __copyright__,
 )  # noqa: E402
 
 project = __project_name__
 version = __version__
 release = __release__
 author = __author__
-copyright = __copyright__
+# copyright = __copyright__
 
 # -- General configuration ---------------------------------------------------
 
