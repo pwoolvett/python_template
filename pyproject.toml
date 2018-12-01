@@ -3,7 +3,7 @@
   project_name = "package"
   version = "0.1.0"
   release = "pre-alpha"
-  description = "Administrador de catalogo para constructoda salfa"
+  description = "Template for python projects"
   author = "Pablo Woolvett <pablowoolvett@gmail.com>"
   authors = ["Pablo Woolvett <pablowoolvett@gmail.com>",]
   maintainer = "Pablo Woolvett <pablowoolvett@gmail.com>"
