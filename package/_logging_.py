@@ -1,7 +1,6 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
-"""
-    All things log-related: configuration, logger creation, etc
+"""All things log-related: configuration, logger creation, etc
 """
 
 import logzero
@@ -30,22 +29,7 @@ def get_logger(log_level=1):
     """
 
     _logger = logzero.setup_logger(
-        name="babel", level=log_level, formatter=MyFormatter()
+        name=__package__, level=log_level, formatter=MyFormatter()
     )
 
     return _logger
-
-
-if __name__ == "__main__":
-    logger = get_logger()
-
-    logger.debug("debug\nasdf")
-    logger.info("info\nasdf")
-    logger.warning("warning\nasdf")
-    logger.error("error\nasdf")
-
-    # This is how you'd log an exception
-    try:
-        raise Exception("this is a demo exception")
-    except Exception as e:
-        logger.exception(e)
