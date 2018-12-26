@@ -5,7 +5,7 @@
    Initial version.
 
 """
-from package import _logging_ as logging
+from {{ cookiecutter.slug_name }} import _logging_ as logging
 
 
 class Metadata:

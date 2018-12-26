@@ -7,7 +7,7 @@ sys.path.insert(0, os.path.abspath('../..'))
 
 # -- Project information -----------------------------------------------------
 
-from {{ cookiecutter.project_name }} import (
+from {{ cookiecutter.slug_name }} import (
     __version__,
     __release__,
     __project_name__,

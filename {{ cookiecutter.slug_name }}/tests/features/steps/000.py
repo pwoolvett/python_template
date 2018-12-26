@@ -1,6 +1,6 @@
 from behave import given, when, then
 
-from {{ cookiecutter.project_name }} import settings
+from {{ cookiecutter.slug_name }} import settings
 
 
 @given("we have behave installed2")

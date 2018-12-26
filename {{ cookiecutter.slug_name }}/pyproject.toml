@@ -1,13 +1,15 @@
 [tool.poetry]
-  name = "{{ cookiecutter.project_name }}"
   project_name = "{{ cookiecutter.project_name }}"
-  version = "{{ cookiecutter.project_version }}"
+  name = "{{ cookiecutter.slug_name }}"
+  version = "{{ cookiecutter.version }}"
   release = "{{ cookiecutter.release }}"
-  description = "{{ cookiecutter.project_description }}"
+  description = "{{ cookiecutter.description }}"
   author = "{{ cookiecutter.author_name }} <{{ cookiecutter.author_mail }}>"
-  authors = ["{{ cookiecutter.author_name }} <{{ cookiecutter.author_mail }}",]
-  maintainer = "{{ cookiecutter.author_name }} <{{ cookiecutter.author_mail }}"
-  license = "{{ cookiecutter.license }} <{{ cookiecutter.author_mail }}"
+  authors = [
+    "{{ cookiecutter.author }}"
+  ]
+  maintainer = "{{ cookiecutter.author_name }} <{{ cookiecutter.author_mail }}>"
+  license = "{{ cookiecutter.license }}"
   copyright = "{{ cookiecutter.copyright }}"
   url = "{{ cookiecutter.url }}"
 

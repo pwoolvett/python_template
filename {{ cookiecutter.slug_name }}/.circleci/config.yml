@@ -6,7 +6,7 @@ version: 2
 jobs:
   build:
     environment:
-      CC_TEST_REPORTER_ID: 250da7889bee255795a02df787c93f0288081737fb748f69ac6331cb6c879616
+      CC_TEST_REPORTER_ID: "{{ cookiecutter.CC_TEST_REPORTER_ID }}",
     docker:
       # specify the version you desire here
       # use `-browsers` prefix for selenium tests, e.g. `3.6.1-browsers`
@@ -25,7 +25,7 @@ jobs:
       # Download and cache dependencies
       - restore_cache:
           keys:
-          - v1-dependencies-{{ checksum "poetry.lock" }}
+          - v1-dependencies-{{ '{{' }} checksum "poetry.lock" {{ '}}' }}
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
       - run:
@@ -39,7 +39,7 @@ jobs:
       - save_cache:
           paths:
             - ./venv
-          key: v1-dependencies-{{ checksum "poetry.lock" }}
+          key: v1-dependencies-{{ '{{' }} checksum "poetry.lock" {{ '}}' }}
 
       - run:
           name: Setup Code Climate test-reporter
