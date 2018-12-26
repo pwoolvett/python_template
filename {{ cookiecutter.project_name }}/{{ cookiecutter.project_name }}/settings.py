@@ -27,7 +27,7 @@ def __getattr__(env_var_name: str) -> str:
         env_var_name: Name of the variable to access
 
     Returns:
-      The value of the env var, according to :param:`os.environ`, después de llamar a
+      The value of the env var, according to :param:`os.environ`, after calling
       :func:`load_dotenv`.
 
     Example::
@@ -37,7 +37,7 @@ def __getattr__(env_var_name: str) -> str:
       $ python -c "from unspsc import settings ; print(settings.UNSPSC_SQL)"
         DEV
 
-    Note: Variable is loade from env only "If an attribute is not found on a module
+    Note: Variable is loaded from env only "If an attribute is not found on a module
     object through the normal lookup"
 
     See Also:

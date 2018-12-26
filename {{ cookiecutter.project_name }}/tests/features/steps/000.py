@@ -1,6 +1,6 @@
 from behave import given, when, then
 
-from package import settings
+from {{ cookiecutter.project_name }} import settings
 
 
 @given("we have behave installed2")

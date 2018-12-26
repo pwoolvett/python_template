@@ -1,15 +1,15 @@
 [tool.poetry]
-  name = "package"
-  project_name = "package"
-  version = "0.1.0"
-  release = "pre-alpha"
-  description = "Template for python projects"
-  author = "Pablo Woolvett <pablowoolvett@gmail.com>"
-  authors = ["Pablo Woolvett <pablowoolvett@gmail.com>",]
-  maintainer = "Pablo Woolvett <pablowoolvett@gmail.com>"
-  license = "MIT"
-  copyright = ""
-  url = "https://github.com/pwoolvett/python-template"
+  name = "{{ cookiecutter.project_name }}"
+  project_name = "{{ cookiecutter.project_name }}"
+  version = "{{ cookiecutter.project_version }}"
+  release = "{{ cookiecutter.release }}"
+  description = "{{ cookiecutter.project_description }}"
+  author = "{{ cookiecutter.author_name }} <{{ cookiecutter.author_mail }}>"
+  authors = ["{{ cookiecutter.author_name }} <{{ cookiecutter.author_mail }}",]
+  maintainer = "{{ cookiecutter.author_name }} <{{ cookiecutter.author_mail }}"
+  license = "{{ cookiecutter.license }} <{{ cookiecutter.author_mail }}"
+  copyright = "{{ cookiecutter.copyright }}"
+  url = "{{ cookiecutter.url }}"
 
 
 [tool.poetry.dependencies]

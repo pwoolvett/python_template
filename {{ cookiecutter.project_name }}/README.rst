@@ -17,7 +17,6 @@
 3. enjoy!
 
 reqs:
-  cookiecutter
   poetry
   tox
   python>=3.7
