@@ -1,5 +1,6 @@
 {
   "project_name": null,
+  "python_version": "{{ cookiecutter.python_version }}",
   "version": "0.1.0",
   "release": "pre-alpha",
   "description": "",
