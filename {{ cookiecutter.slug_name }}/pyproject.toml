@@ -15,7 +15,7 @@
 
 
 [tool.poetry.dependencies]
-  python = "^3.7"
+  python = "^{{ cookiecutter.python_version }}"
   python-dotenv = { git = "https://github.com/theskumar/python-dotenv.git", branch = "master" }
   fire = "^0.1.3"
   tqdm = "^4.28"
