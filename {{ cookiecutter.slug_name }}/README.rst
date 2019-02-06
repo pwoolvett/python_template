@@ -11,21 +11,18 @@
    :target: https://codeclimate.com/github/pwoolvett/python_template/maintainability
    :alt: Maintainability
 
-
-1. clone
-2. refactor "package" folder
-3. enjoy!
-
-reqs:
+Development requirements:
   poetry
   tox
-  python>=3.7
+  python>={{ cookiecutter.python_version }}
 
-for dev:
-  :code:`tox -e env` creates virtualenv located at .venv
+note:
+  :code:`tox -e venv` creates virtualenv located at .venv
+
 
 testing:
 
+- just run tox in project root
 - unit / developer-required tests with pytest
 - integration testing with docker-compose+pytest
 - user stories testing with docker-compose+behave
