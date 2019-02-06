@@ -1,7 +1,7 @@
 # coding=utf-8
 """Package documentation
 
-.. versionadded:: 0.1.0
+.. versionadded:: "{{ cookiecutter.version }}"
    Initial version.
 
 """
