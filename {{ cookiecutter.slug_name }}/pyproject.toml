@@ -21,7 +21,7 @@
   tqdm = "^4.28"
   pandas = "^0.23.4"
   Autologging = "^1.2"
-  petri = "^0.1.0"
+  petri = {git = "https://github.com/pwoolvett/petri.git"}
   
 
 [tool.poetry.dev-dependencies]
