@@ -6,6 +6,6 @@
 
 """
 
-from petri import init
+import petri
 
 settings, logger = petri.init()
