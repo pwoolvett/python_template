@@ -3,7 +3,7 @@
 from shutil import copy2 as copy
 from subprocess import run 
 
-def exec(string:str):
+def _exec(string:str):
     return run([*string.split()])
 
 # create dotenv file
@@ -21,8 +21,8 @@ commands = [
     "git push --set-upstream origin master",
 ]
 for command in commands:
-    exec(command)
+    _exec(command)
 
 # install virtualenv into ./.venv/ and run poetry install
-exec('tox -e venv')
+_exec('tox -e venv')
 
