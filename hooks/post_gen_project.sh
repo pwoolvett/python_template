@@ -1,5 +1,5 @@
 
-
+#!/usr/bin/env bash
 # create dotenv file
 cp .env.dist .env
 echo -e "FILE_CREATED_BY=python_template\n">> .env
