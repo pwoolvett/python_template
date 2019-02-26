@@ -4,7 +4,7 @@ from shutil import copy2 as copy
 from subprocess import run 
 
 def _exec(string):
-    return run([*string.split()])
+    return run(list(string.split()))
 
 # create dotenv file
 copy('.env.dist','.env')
