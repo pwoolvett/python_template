@@ -1,4 +1,4 @@
-Welcome to myproject's documentation!
+Welcome to {{ cookiecutter.project_name }}'s documentation!
 =====================================
 
 .. toctree::

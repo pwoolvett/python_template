@@ -19,7 +19,10 @@ def pytest_addoption(parser):
     :code:`@pytest.mark.slow` marked tests.
     """
     parser.addoption(
-        "--runslow", action="store_true", default=False, help="run slow tests"
+        "--runslow",
+        action="store_true",
+        default=False,
+        help="run slow tests"
     )
 
 

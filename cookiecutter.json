@@ -1,0 +1,20 @@
+{
+  "project_name": null,
+  "python_version": "3.6",
+  "version": "0.1.0",
+  "release": "pre-alpha",
+  "description": "",
+  "url": "",
+  "license": "MIT",
+  "copyright": "",
+  "app_name": "{{ cookiecutter.project_name.lower().replace(' ', '_').replace('-', '_') }}",
+  "slug_name": "{{ cookiecutter.app_name }}",
+  "project_short_description": "{{ cookiecutter.description }}",
+
+  "author_name": "Pablo Woolvett",
+  "author_mail": "pablowoolvett@gmail.com",
+  "author": "{{ cookiecutter.author_name }} <{{ cookiecutter.author_mail }}>",
+  "authors": "[{{ cookiecutter.author }},]",
+  "maintainer": "{{ cookiecutter.author }}",
+  "github_username": "pwoolvett"
+}

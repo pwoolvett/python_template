@@ -4,6 +4,6 @@
 
 import fire
 
-from package.scripts import *  # noqa: E123
+from {{ cookiecutter.slug_name }}.scripts import *  # noqa: E123
 
 fire.Fire()
