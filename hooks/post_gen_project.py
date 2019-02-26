@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 
 from shutil import copy2 as copy
-from subprocess import run 
+import subprocess
 
 def _exec(string):
-    return run(list(string.split()))
+    return call(list(string.split()))
 
 # create dotenv file
 copy('.env.dist','.env')
