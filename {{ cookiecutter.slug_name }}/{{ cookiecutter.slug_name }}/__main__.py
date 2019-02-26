@@ -2,8 +2,8 @@
 # -*- coding: utf-8 -*-
 """Expose scripts"""
 
-import fire
+from fire import Fire as _Fire
 
 from {{ cookiecutter.slug_name }}.scripts import *  # noqa: E123
 
-fire.Fire()
+_Fire()
