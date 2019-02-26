@@ -5,9 +5,11 @@
   release = "{{ cookiecutter.release }}"
   description = "{{ cookiecutter.description }}"
   readme = "README.rst"
-  author = "{{ cookiecutter.author }}"
-  authors = "{{ cookiecutter.authors }}"
-  maintainer = "{{ cookiecutter.author }}"
+  author = "{{ cookiecutter.author_name }} <{{ cookiecutter.author_mail }}>"
+  authors = [
+    "{{ cookiecutter.author }}"
+  ]
+  maintainer = "{{ cookiecutter.author_name }} <{{ cookiecutter.author_mail }}>"
   license = "{{ cookiecutter.license }}"
   copyright = "{{ cookiecutter.copyright }}"
   url = "{{ cookiecutter.url }}"
