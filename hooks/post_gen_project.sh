@@ -1,4 +1,10 @@
 
+
+# create dotenv file
+cp .env.dist .env
+echo -e "FILE_CREATED_BY=python_template\n">> .env
+
+
 # initialize git repo
 git init
 git remote add origin {{ cookiecutter.repo }}
