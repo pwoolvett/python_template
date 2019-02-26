@@ -66,11 +66,21 @@ Without virtualenv activated (!), run `tox` in the project root. This runs the f
    - might use docker-compose
    - run with pytest
 
-+ User stories testing with behave and docker-compose:
++ [DISABLED BY DEFAULT] User stories testing with behave and docker-compose:
 
    - located in tests/features
    - might use docker-compose
    - run with behave
+
++ Coverage reports:
+
+   - located in `coverage.unit.xml` and `coverage.integration.xml`
+
++ Documentation:
+
+   - Builds using sphinx
+   - Source located at `docs/source`
+   - Output located at `docs/build`
 
 Contribute
 ----------
