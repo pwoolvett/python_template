@@ -3,7 +3,7 @@
 from shutil import copy2 as copy
 from subprocess import run 
 
-def _exec(string:str):
+def _exec(string):
     return run([*string.split()])
 
 # create dotenv file
