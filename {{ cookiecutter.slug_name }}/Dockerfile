@@ -1,5 +1,7 @@
 FROM python:{{ cookiecutter.python_version }}-alpine
 
+MAINTAINER {{ cookiecutter.author }}
+
 # Install system dependencies here
 RUN "curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python"
 
