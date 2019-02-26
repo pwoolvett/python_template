@@ -16,5 +16,5 @@
   "maintainer": "{{ cookiecutter.author }}",
   "github_username": "pwoolvett",
   "repo": "https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_name }}.git",
-  "url": "http://{{ cookiecutter.github_username }}.github.io/repository{{ cookiecutter.project_name }}"
+  "url": "http://{{ cookiecutter.github_username }}.github.io/{{ cookiecutter.project_name }}"
 }
