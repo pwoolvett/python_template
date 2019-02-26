@@ -1,28 +1,90 @@
-.. image:: https://circleci.com/gh/pwoolvett/python_template.svg?style=shield
-    :target: https://circleci.com/gh/pwoolvett/python_template
-    :alt: Build Status
+===============================
+{{ cookiecutter.project_name }}
+===============================
 
-.. image:: https://api.codeclimate.com/v1/badges/f0f976249fae332a0bab/test_coverage
-   :target: https://codeclimate.com/github/pwoolvett/python_template/test_coverage
-   :alt: Test Coverage
+{{ cookiecutter.description }}
+
+Sample Usage
+------------
+
+Show available scripts::
+
+  $ python {{ cookiecutter.project_name }}
+
+Requirements
+------------
+
+- User requirements
+
+   + python>={{ cookiecutter.python_version }}
+   + poetry (recommended)
+
+- Development requirements
+
+   + tox
+   + docker >=18.09
+   + docker-compose >= 1.22
 
 
-.. image:: https://api.codeclimate.com/v1/badges/f0f976249fae332a0bab/maintainability
-   :target: https://codeclimate.com/github/pwoolvett/python_template/maintainability
-   :alt: Maintainability
+Installation
+------------
 
-Development requirements:
-  poetry
-  tox
-  python>={{ cookiecutter.python_version }}
+- User:
 
-note:
-  :code:`tox -e venv` creates virtualenv located at .venv
+   + Install {{ cookiecutter.app_name }} by running::
+
+      $ poetry install --no-dev -v
+
+   + Alternatively, create a virtualenv and manually install all the requirements
+     listed in `./pyproject.toml` -> `tool.poetry.dependencies`
+
+- Development:
+
+   + Create virtualenv and install install {{ cookiecutter.app_name }} (with
+     development libs) by running::
+
+      $ tox -e venv # internally this runs `poetry install -v`
+
+   + Alternatively, create a virtualenv and manually install all the requirements
+     listed in `./pyproject.toml` -> `tool.poetry.dependencies` and
+     `tool.poetry.dev-dependencies`.
 
 
-testing:
+Testing
+-------
 
-- just run tox in project root
-- unit / developer-required tests with pytest
-- integration testing with docker-compose+pytest
-- user stories testing with docker-compose+behave
+Without virtualenv activated (!), run `tox` in the project root. This runs the following:
+
++ Unit tests and developer-designed tests:
+
+   - located in tests/unit
+   - run with pytest
+
++ Integration testing:
+
+   - located in tests/integration
+   - might use docker-compose
+   - run with pytest
+
++ User stories testing with behave and docker-compose:
+
+   - located in tests/features
+   - might use docker-compose
+   - run with behave
+
+Contribute
+----------
+
+- Issue Tracker: {{ cookiecutter.repo }}/issues
+- Source Code: {{ cookiecutter.repo }}
+
+Support
+-------
+
+If you are having issues, please let us know.
+We have a mailing list located at: {{ cookiecutter.project_name }}
+
+License
+-------
+
+{{ cookiecutter.license }}

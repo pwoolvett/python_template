@@ -16,5 +16,6 @@
   "author": "{{ cookiecutter.author_name }} <{{ cookiecutter.author_mail }}>",
   "authors": "[{{ cookiecutter.author }},]",
   "maintainer": "{{ cookiecutter.author }}",
-  "github_username": "pwoolvett"
+  "github_username": "pwoolvett",
+  "repo": "https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_name }}.git"
 }
