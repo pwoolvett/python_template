@@ -15,6 +15,6 @@
   "authors": "[{{ cookiecutter.author }},]",
   "maintainer": "{{ cookiecutter.author }}",
   "github_username": "pwoolvett",
-  "repo": "https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.slug_name }}.git",
+  "repo": "git@github.com:{{ cookiecutter.github_username }}/{{ cookiecutter.slug_name }}.git",
   "url": "http://{{ cookiecutter.github_username }}.github.io/{{ cookiecutter.slug_name }}"
 }
