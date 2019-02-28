@@ -14,6 +14,8 @@
   copyright = "{{ cookiecutter.copyright }}"
   url = "{{ cookiecutter.url }}"
 
+[tool.poetry.scripts]
+{{ cookiecutter.slug_name }} = '{{ cookiecutter.slug_name }}.__main__:_Fire'
 
 [tool.poetry.dependencies]
   python = "^{{ cookiecutter.python_version }}"
