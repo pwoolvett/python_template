@@ -5,6 +5,9 @@ MAINTAINER {{ cookiecutter.author }}
 # Install system dependencies here
 RUN "curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python"
 
+# Update system deps
+RUN "poetry self:update --preview"
+
 # avoid virtualenvs in production, see https://github.com/sdispater/poetry/issues/218
 RUN "poetry config settings.virtualenvs.create false"
 
@@ -13,7 +16,7 @@ ADD poetry.lock /app/
 ADD pyproject.toml /app/
 
 WORKDIR /app
-RUN "poetry install --no-dev -v"
+RUN "poetry install --no-dev -vvv"
 
 ADD . /app
 

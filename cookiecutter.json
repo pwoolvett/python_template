@@ -3,18 +3,89 @@
   "python_version": "3.6",
   "version": "0.1.0",
   "release": "pre-alpha",
-  "description": "",
-  "license": "MIT",
-  "copyright": "",
-  "app_name": "{{ cookiecutter.project_name.lower().replace(' ', '_').replace('-', '_') }}",
+  "description": null,
+  "max_line_length": "88",
+  "license": [
+    "MIT",
+    "BSD",
+    "GPLv3",
+    "Apache Software License 2.0",
+    ""
+  ],
+  "additional_libs": [
+    "y: tqdm",
+    "all: tqdm,pandas",
+    "y: pandas",
+    "n"
+  ],
+  "timezone": [
+    "UTC-4",
+    "UTC-3",
+    "UTC"
+  ],
+  "formatter": [
+    "all: autopep8,black",
+    "y: black",
+    "y: autopep8",
+    "n"
+  ],
+  "linter": [
+    "all: flake8,pylint,mypy,bandit",
+    "y: flake8",
+    "y: pylint",
+    "y: mypy",
+    "y: bandit",
+    "n"
+  ],
+  "docker": [
+    "all: dockerfile,docker-compose",
+    "y: dockerfile",
+    "y: docker-compose",
+    "n"
+  ],
+  "testing": [
+    "y: pytest,coverage,pytest-coverage",
+    "y: pytest,coverage,pytest-coverage,hypothesis",
+    "all: pytest,coverage,pytest-coverage,hypothesis,behave",
+    "n"
+  ],
+  "docs": [
+    "all: sphinx, sphinx_rtd_theme, sphinx-autodoc-typehints",
+    "y: sphinx",
+    "n"
+  ],
+  "git": [
+    "y: git",
+    "all: git,github",
+    "n"
+  ],
+  "github_username": [
+    "",
+    "{{ github_username }}"
+  ],
+  "repo": [
+    "",
+    "git@github.com:{{ cookiecutter.github_username }}/{{ cookiecutter.slug_name }}.git"
+  ],
+  "url": [
+    "",
+    "http://{{ cookiecutter.github_username }}.github.io/{{ cookiecutter.slug_name }}"
+  ],
+  "default_env":[
+    "development",
+    "testing",
+    "production"
+  ],
+  "app_name": "{{ cookiecutter.project_name.lower()|replace(' ', '_')|replace('-', '_')|replace('.', '_')|trim() }}",
   "slug_name": "{{ cookiecutter.app_name }}",
   "project_short_description": "{{ cookiecutter.description }}",
-  "author_name": "Pablo Woolvett",
-  "author_mail": "pablowoolvett@gmail.com",
+  "author_name": "{{ full_name }}",
+  "author_mail": "{{ email }}",
   "author": "{{ cookiecutter.author_name }} <{{ cookiecutter.author_mail }}>",
   "authors": "[{{ cookiecutter.author }},]",
   "maintainer": "{{ cookiecutter.author }}",
-  "github_username": "pwoolvett",
-  "repo": "git@github.com:{{ cookiecutter.github_username }}/{{ cookiecutter.slug_name }}.git",
-  "url": "http://{{ cookiecutter.github_username }}.github.io/{{ cookiecutter.slug_name }}"
+  "copyright": [
+    "",
+    "Copyright (c) {% now 'utc', '%Y' %}, {{ cookiecutter.author_name }}"
+  ]
 }

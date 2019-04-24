@@ -1,0 +1,85 @@
+[tool.poetry]
+  project_name = "{{ cookiecutter.project_name }}"
+  name = "{{ cookiecutter.slug_name }}"
+  version = "{{ cookiecutter.version }}"
+  release = "{{ cookiecutter.release }}"
+  description = "{{ cookiecutter.description }}"
+  readme = "README.rst"
+  author = "{{ cookiecutter.author_name }} <{{ cookiecutter.author_mail }}>"
+  authors = [
+    "{{ cookiecutter.author }}"
+  ]
+  maintainer = "{{ cookiecutter.author_name }} <{{ cookiecutter.author_mail }}>"
+  {%- if cookiecutter.license is not "" -%}
+    license = "{{ cookiecutter.license }}"
+  {%- endif -%}
+  {%- if cookiecutter.copyright is not "" -%}
+    copyright = "{{ cookiecutter.copyright }}"
+  {%- endif -%}
+  {%- if cookiecutter.url is not "" -%}
+    url = "{{ cookiecutter.url }}"
+  {%- endif -%}
+
+[tool.poetry.scripts]
+  "{{ cookiecutter.slug_name }} = {{ cookiecutter.slug_name }}.__main__:_Fire"
+
+[tool.poetry.dependencies]
+  python = "^{{ cookiecutter.python_version }}"
+  fire = "^0.1.3"
+  petri = {git = "https://github.com/pwoolvett/petri.git"}
+  {%- if "tqdm" in cookiecutter.additional_libs -%}
+    tqdm = "^4.28"
+  {%- endif -%}
+  {%- if "pandas" in cookiecutter.additional_libs -%}
+    pandas = "^0.23.4"
+  {%- endif -%}
+
+
+[tool.poetry.dev-dependencies]
+  {%- if "black" in cookiecutter.formatter -%}
+    black = { git = "https://github.com/ambv/black.git", branch = "master" }
+  {%- endif -%}
+  {%- if "autopep8" in cookiecutter.formatter -%}
+    autopep8 = "^1.4"
+  {%- endif -%}
+  {%- if "flake8" in cookiecutter.linter -%}
+    flake8 = "^3.7"
+  {%- endif -%}
+  {%- if "pylint" in cookiecutter.linter -%}
+    pylint = "^2.3"
+  {%- endif -%}
+  {%- if "mypy" in cookiecutter.linter -%}
+    mypy = "^0.701"
+    mypy-extensions = "^0.4"
+  {%- endif -%}
+  {%- if "bandit" in cookiecutter.linter -%}
+    bandit = "^1.5"
+  {%- endif -%}
+  {%- if "pytest" in cookiecutter.testing -%}
+    pytest = "^4.0"
+  {%- endif -%}
+  {%- if "coverage" in cookiecutter.testing -%}
+    coverage = "^4.5"
+    {%- if "pytest" in cookiecutter.testing -%}
+      pytest-cov = "^2.6"
+    {%- endif -%}
+  {%- endif -%}
+  {%- if "hypothesis" in cookiecutter.testing -%}
+    hypothesis = "^4.17"
+  {%- endif -%}
+  {%- if "behave" in cookiecutter.testing -%}
+    behave = "^1.2"
+  {%- endif -%}
+  {%- if "sphinx" in cookiecutter.docs -%}
+    Sphinx = "^1.8"
+  {%- endif -%}
+  {%- if "rtd" in cookiecutter.docs -%}
+    sphinx_rtd_theme = "^0.4.2"
+  {%- endif -%}
+  {%- if "autodoc" in cookiecutter.docs -%}
+    sphinx-autodoc-typehints = "^1.5"
+  {%- endif -%}
+
+[build-system]
+ requires = ["poetry>=0.12"]
+ build-backend = "poetry.masonry.api"

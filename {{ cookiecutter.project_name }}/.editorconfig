@@ -22,7 +22,7 @@ trim_trailing_whitespace = false
 [*.py]
 max_line_length = 88
 
-[*.{html,css,scss,json,yml,yaml, toml, ini}]
+[*.{html,css,scss,json,yml,yaml,toml,ini}]
 indent_style = space
 indent_size = 2
 

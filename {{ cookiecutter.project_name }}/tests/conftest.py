@@ -10,9 +10,9 @@ Activate common pytest patterns and set environment variables:
 
 """
 import os
-
 import pytest
 
+from tests import define_test_dotenv
 
 def pytest_addoption(parser):
     """Adds a `--runslow` command line option to control skipping of
@@ -159,11 +159,7 @@ def pytest_runtest_makereport(item, call):
 
 
 def pytest_configure(config):
-    dotenv_location = "tests/.env.test"
-    os.environ["DOTENV_LOCATION"] = dotenv_location
-    if os.path.isfile(dotenv_location):
-        os.remove(dotenv_location)
-
+    define_test_dotenv()
     return config
 
 
