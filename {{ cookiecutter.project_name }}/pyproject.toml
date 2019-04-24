@@ -10,13 +10,13 @@
     "{{ cookiecutter.author }}"
   ]
   maintainer = "{{ cookiecutter.author_name }} <{{ cookiecutter.author_mail }}>"
-  {%- if cookiecutter.license is not "" -%}
+  {%- if cookiecutter.license != "" -%}
     license = "{{ cookiecutter.license }}"
   {%- endif -%}
-  {%- if cookiecutter.copyright is not "" -%}
+  {%- if cookiecutter.copyright != "" -%}
     copyright = "{{ cookiecutter.copyright }}"
   {%- endif -%}
-  {%- if cookiecutter.url is not "" -%}
+  {%- if cookiecutter.url != "" -%}
     url = "{{ cookiecutter.url }}"
   {%- endif -%}
 

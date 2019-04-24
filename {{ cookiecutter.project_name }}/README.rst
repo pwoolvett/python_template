@@ -22,7 +22,7 @@ Requirements
 - Development requirements
 
    + tox
-   {%- if cookiecutter.use_docker|lower == "n" -%}
+   {%- if "dockerfile" in cookiecutter.docker|lower == "n" -%}
    + docker >=18.09
    + docker-compose >= 1.22
    {%- endif -%}
@@ -89,7 +89,7 @@ Contribute
 
 - Development
    For tests design, you can use use ´@pytest.mark.incremental´ and  ´@pytest.mark.slow´. See "{{ cookiecutter.project_name }}/tests/conftest.py"
-{%- if cookiecutter.use_github|lower == "y" -%}
+{%- if "github" in cookiecutter.git -%}
 - Issue Tracker: {{ cookiecutter.repo }}/issues
 - Source Code: {{ cookiecutter.repo }}
 {%- endif -%}

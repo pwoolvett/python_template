@@ -1,4 +1,4 @@
-{% if 'MIT' in cookiecutter.license ==  %}
+{% if 'MIT' in cookiecutter.license %}
 The MIT License (MIT)
 {{ cookiecutter.copyright }}
 

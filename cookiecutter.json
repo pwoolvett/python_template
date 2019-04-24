@@ -1,9 +1,12 @@
 {
   "project_name": null,
+  "app_name": "{{ cookiecutter.project_name|lower()|replace(' ', '_')|replace('-', '_')|replace('.', '_')|trim() }}",
+  "slug_name": "{{ cookiecutter.app_name }}",
   "python_version": "3.6",
   "version": "0.1.0",
   "release": "pre-alpha",
   "description": null,
+  "project_short_description": "{{ cookiecutter.description }}",
   "max_line_length": "88",
   "license": [
     "MIT",
@@ -13,10 +16,10 @@
     ""
   ],
   "additional_libs": [
-    "y: tqdm",
-    "all: tqdm,pandas",
-    "y: pandas",
-    "n"
+    "tqdm",
+    "tqdm,pandas",
+    "pandas",
+    "none"
   ],
   "timezone": [
     "UTC-4",
@@ -24,45 +27,42 @@
     "UTC"
   ],
   "formatter": [
-    "all: autopep8,black",
-    "y: black",
-    "y: autopep8",
-    "n"
+    "autopep8,black",
+    "black",
+    "autopep8",
+    "none"
   ],
   "linter": [
-    "all: flake8,pylint,mypy,bandit",
-    "y: flake8",
-    "y: pylint",
-    "y: mypy",
-    "y: bandit",
-    "n"
+    "flake8,pylint,mypy,bandit",
+    "flake8",
+    "pylint",
+    "mypy",
+    "bandit",
+    "none"
   ],
   "docker": [
     "all: dockerfile,docker-compose",
     "y: dockerfile",
     "y: docker-compose",
-    "n"
+    "none"
   ],
   "testing": [
-    "y: pytest,coverage,pytest-coverage",
-    "y: pytest,coverage,pytest-coverage,hypothesis",
-    "all: pytest,coverage,pytest-coverage,hypothesis,behave",
-    "n"
+    "pytest,coverage,pytest-coverage",
+    "pytest,coverage,pytest-coverage,hypothesis",
+    "pytest,coverage,pytest-coverage,hypothesis,behave",
+    "none"
   ],
   "docs": [
-    "all: sphinx, sphinx_rtd_theme, sphinx-autodoc-typehints",
-    "y: sphinx",
-    "n"
+    "sphinx, sphinx_rtd_theme, sphinx-autodoc-typehints",
+    "sphinx",
+    "none"
   ],
   "git": [
-    "y: git",
-    "all: git,github",
-    "n"
+    "git",
+    "git,github",
+    "none"
   ],
-  "github_username": [
-    "",
-    "{{ github_username }}"
-  ],
+  "github_username": null,
   "repo": [
     "",
     "git@github.com:{{ cookiecutter.github_username }}/{{ cookiecutter.slug_name }}.git"
@@ -76,10 +76,7 @@
     "testing",
     "production"
   ],
-  "app_name": "{{ cookiecutter.project_name.lower()|replace(' ', '_')|replace('-', '_')|replace('.', '_')|trim() }}",
-  "slug_name": "{{ cookiecutter.app_name }}",
-  "project_short_description": "{{ cookiecutter.description }}",
-  "author_name": "{{ full_name }}",
+  "author_name": null,
   "author_mail": "{{ email }}",
   "author": "{{ cookiecutter.author_name }} <{{ cookiecutter.author_mail }}>",
   "authors": "[{{ cookiecutter.author }},]",
