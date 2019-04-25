@@ -3,7 +3,7 @@
 """
 import os
 import sys
-from shutil import copy2 as copy
+from shutil import copy2 as copy, rmtree
 import subprocess  # nosec
 
 TERMINATOR = "\x1b[0m"
@@ -91,7 +91,7 @@ def _delete_or_raise(paths_iter):
         if os.path.isfile(path):
             os.remove(path)
         elif os.path.isdir(path):
-            os.rmdir(path)
+            rmtree(path)
         else:
             print(WARNING + f"Can't find path: {path}")
 
@@ -101,102 +101,125 @@ def create_dotenv():
 
     Uses .env.dist as a base, and sets `ENV=cookiecutter.default_env`
     """
+    
+    print(INFO + "Creating and configuring `.env` file" + TERMINATOR)
     copy(".env.dist", ".env")
 
     with open(".env", "a+") as dotenv:
         dotenv.write(f"ENV={DEFAULT_ENV}\n")
 
+    print(SUCCESS + "`.env` file created and cofigured" + TERMINATOR)
 
 def config_license():
     """May delete license-related files"""
 
-    file_names = []
+    print(INFO + "Configuring project license" + TERMINATOR)
 
+    file_names = []
     if "GPLv3" not in LICENSE:
         file_names.append("COPYING")
 
     if not LICENSE:
         file_names.extend(("CONTRIBUTORS.txt", "LICENSE"))
-        _delete_or_raise(file_names)
-        return
+        
+    _delete_or_raise(file_names)
+    
+    print(SUCCESS + "Project license configured" + TERMINATOR)
 
 
 def config_docker():
     """Sets up docker and docker-compose, if required"""
 
+    print(INFO + "Configuring docker" + TERMINATOR)
+
     if DOCKER not in NO:
         # TODO: Additional configuration here
-        return
+        pass
+    else:
+        file_names = []
+        if "dockerfile" not in DOCKER:
+            file_names.append("Dockerfile")
 
-    file_names = []
-    if "dockerfile" not in DOCKER:
-        file_names.append("Dockerfile")
+        if "docker-compose" not in DOCKER:
+            file_names.append("docker-compose.yml")
 
-    if "docker-compose" not in DOCKER:
-        file_names.append("docker-compose.yml")
+        _delete_or_raise(file_names)
 
-    _delete_or_raise(file_names)
+    print(SUCCESS + "Docker configured" + TERMINATOR)
 
 
 def config_tests():
     """Sets up testing: pytest, behave, hypothesis, etc, if required"""
 
+    print(INFO + "Setting up testing" + TERMINATOR)
+
     if TESTING in NO:
         _delete_or_raise("tests")
-        return
+    else:
+        file_names, dir_names = [], []
+        hyp_files = (
+            os.path.join("tests", "features", "gherkin_hypothesis.feature"),
+            os.path.join("tests", "features", "steps", "gherkin_hypothesis.py"),
+            os.path.join("tests", "unit", "test_002_hypothesis.py"),
+        )
 
-    file_names, dir_names = [], []
-    hyp_files = (
-        os.path.join("tests", "features", "gherkin_hypothesis.feature"),
-        os.path.join("tests", "features", "steps", "gherkin_hypothesis.py"),
-        os.path.join("tests", "unit", "test_002_hypothesis.py"),
-    )
+        beh_folders = (os.path.join("tests", "features"),)
 
-    beh_folders = (os.path.join("tests", "features"),)
+        if "hypothesis" not in TESTING:
+            file_names.extend(hyp_files)
 
-    if "hypothesis" not in TESTING:
-        file_names.extend(hyp_files)
+        if "behave" not in TESTING:
+            dir_names.extend(beh_folders)
 
-    if "behave" not in TESTING:
-        dir_names.extend(beh_folders)
+        to_delete = (*file_names, *dir_names)
+        _delete_or_raise(to_delete)
 
-    to_delete = (*file_names, *dir_names)
-    _delete_or_raise(to_delete)
-
+    print(SUCCESS + "Testing setup completed" + TERMINATOR)
 
 def config_docs():
     """Sets up docs and sphinx, if required"""
 
+    print(INFO + "Setting up documentation" + TERMINATOR)
+
     if DOCS in NO:
         _delete_or_raise("docs")
+
+    print(SUCCESS + "Documentation setup completed" + TERMINATOR)
 
 
 def configure_git():
     """Configures or deletes git+github stuff"""
 
+    print(INFO + "Setting up GIT" + TERMINATOR)
+
     if GIT in NO:
-        return
+        # TODO: Additional configuration here
+        pass
+    else:
+        commands = []
+        if "git" in GIT:
+            commands.extend(
+                ["git init", "git add .", 'git commit -m "initial___commit"']
+            )
+        if "github" in GIT:
+            commands.extend(
+                [
+                    f"git remote add origin {REPO}",
+                    "git push --set-upstream origin master",
+                ]
+            )
 
-    commands = []
-    if "git" in GIT:
-        commands.extend(
-            ["git init", "git add .", 'git commit -m "initial___commit"']
-        )
-    if "github" in GIT:
-        commands.extend(
-            [
-                f"git remote add origin {REPO}",
-                "git push --set-upstream origin master",
-            ]
-        )
+        for command in commands:
+            _exec(command)
 
-    for command in commands:
-        _exec(command)
-
+    print(SUCCESS + "GIT setup completed" + TERMINATOR)
 
 def create_virtualenv():
     """install virtualenv into ./.venv/ and run poetry install"""
+
+    print(INFO + "Configuring virtual environment and installing libraries" + TERMINATOR)
     _exec("tox -e venv")
+    print(INFO + "Virtual environment configured and libraries installed" + TERMINATOR)
 
 
 def main():
@@ -207,7 +230,7 @@ def main():
     config_tests()
     config_docs()
     configure_git()
-    # create_virtualenv()
+    create_virtualenv()
 
     print(SUCCESS + "Project initialized, keep up the good work!" + TERMINATOR)
 

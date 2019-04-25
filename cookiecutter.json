@@ -13,7 +13,7 @@
     "BSD",
     "GPLv3",
     "Apache Software License 2.0",
-    ""
+    "none"
   ],
   "additional_libs": [
     "tqdm",
