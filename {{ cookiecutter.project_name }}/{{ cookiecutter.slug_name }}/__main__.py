@@ -1,15 +1,14 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
-"""Expose scripts"""
+"""Entrypoints for {{ cookiecutter.slug_name }}"""
 import sys as _sys
 
 from fire import Fire as _Fire_
 
-from {{ cookiecutter.slug_name }}.scripts import *  # noqa: E123
+from {{ cookiecutter.slug_name }}.scripts import *  # pylint: disable=wildcard-import, unused-wildcard-import
 
 if __name__ == "__main__":
-    _Fire_(_sys.modules[__name__])
+    _Fire_()
 else:
-    def _Fire(*a, **kw):
+    def _Fire():  # pylint: disable=invalid-name
         return _Fire_(_sys.modules[__name__])
-

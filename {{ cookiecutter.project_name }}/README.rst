@@ -25,7 +25,7 @@ Requirements
    {%- if "dockerfile" in cookiecutter.docker|lower == "n" -%}
    + docker >=18.09
    + docker-compose >= 1.22
-   {%- endif -%}
+   {%- endif %}
 
 
 Installation
@@ -92,7 +92,7 @@ Contribute
 {%- if "github" in cookiecutter.git -%}
 - Issue Tracker: {{ cookiecutter.repo }}/issues
 - Source Code: {{ cookiecutter.repo }}
-{%- endif -%}
+{%- endif %}
 
 
 Support
@@ -101,16 +101,20 @@ Support
 If you are having issues, please let us know.
 Contact us at: {{ cookiecutter.project_name }} {{ cookiecutter.maintainer }}
 
-{%- if cookiecutter.license|trim() != "" -%}
+{%- if cookiecutter.license|trim() != "" %}
+{%- if cookiecutter.license %}
 License
 -------
 
 {{ cookiecutter.license }}
-{%- endif -%}
+{%- endif %}
+{%- endif %}
 
+{%- if cookiecutter.copyright -%}
 {%- if cookiecutter.copyright|trim() != "" -%}
 Copyright
 -------
 
 {{ cookiecutter.copyright }}
+{%- endif -%}
 {%- endif -%}

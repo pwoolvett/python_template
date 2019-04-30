@@ -9,17 +9,17 @@
   "project_short_description": "{{ cookiecutter.description }}",
   "max_line_length": "88",
   "license": [
+    "none",
     "MIT",
     "BSD",
     "GPLv3",
-    "Apache Software License 2.0",
-    "none"
+    "Apache Software License 2.0"
   ],
   "additional_libs": [
+    "none",
     "tqdm",
     "tqdm,pandas",
-    "pandas",
-    "none"
+    "pandas"
   ],
   "timezone": [
     "UTC-4",
@@ -27,9 +27,9 @@
     "UTC"
   ],
   "formatter": [
-    "autopep8,black",
-    "black",
-    "autopep8",
+    "isort,autopep8,black",
+    "isort,black",
+    "isort,autopep8",
     "none"
   ],
   "linter": [
@@ -41,14 +41,14 @@
     "none"
   ],
   "docker": [
-    "all: dockerfile,docker-compose",
-    "y: dockerfile",
-    "y: docker-compose",
-    "none"
+    "none",
+    "dockerfile,docker-compose",
+    "dockerfile",
+    "docker-compose"
   ],
   "testing": [
-    "pytest,coverage,pytest-coverage",
     "pytest,coverage,pytest-coverage,hypothesis",
+    "pytest,coverage,pytest-coverage",
     "pytest,coverage,pytest-coverage,hypothesis,behave",
     "none"
   ],

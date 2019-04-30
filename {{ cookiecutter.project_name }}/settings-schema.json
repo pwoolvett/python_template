@@ -1,0 +1,138 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Config",
+  "type": "object",
+  "properties": {
+    "ENV": {
+      "type": "string",
+      "description": "Execution mode of the project",
+      "enum": [
+        "production",
+        "development",
+        "testing"
+      ]
+    },
+    "BASEPATH": {
+      "type": "string",
+      "description": "Absolute path to the project directory"
+    },
+    "PKG_PATH": {
+      "type": "string",
+      "description": "Absolute path to the package directory"
+    },
+    "DATA": {
+      "type": "string",
+      "description": "Absolute path to the project's data directory"
+    },
+    "DEBUG": {
+      "type": "boolean",
+      "description": "Set to True to enable debugging"
+    },
+    "TESTING": {
+      "type": "boolean",
+      "description": "Set to True to enable testing mode"
+    },
+    "LOG_LEVEL": {
+      "type": "integer",
+      "description": "Explicitly define allowed logging levels",
+      "oneOf": [
+        {
+          "enum": [
+            0,
+            "LogLevel.NOTSET"
+          ]
+        },
+        {
+          "enum": [
+            1,
+            "LogLevel.TRACE"
+          ]
+        },
+        {
+          "enum": [
+            10,
+            "LogLevel.DEBUG"
+          ]
+        },
+        {
+          "enum": [
+            20,
+            "LogLevel.INFO"
+          ]
+        },
+        {
+          "enum": [
+            30,
+            "LogLevel.WARNING"
+          ]
+        },
+        {
+          "enum": [
+            40,
+            "LogLevel.ERROR"
+          ]
+        },
+        {
+          "enum": [
+            50,
+            "LogLevel.CRITICAL"
+          ]
+        }
+      ]
+    },
+    "LOG_MODE": {
+      "type": "integer",
+      "description": "Define allowed destinations for logs",
+      "anyOf": [
+        {
+          "minimum": 1,
+          "exclusiveMaximum": 32
+        },
+        {
+          "oneOf": [
+            {
+              "enum": [
+                1,
+                "LogMode.CONSOLE"
+              ]
+            },
+            {
+              "enum": [
+                2,
+                "LogMode.TRACE_FILE"
+              ]
+            },
+            {
+              "enum": [
+                4,
+                "LogMode.ERROR_FILE"
+              ]
+            },
+            {
+              "enum": [
+                8,
+                "LogMode.TRACE_DB"
+              ]
+            },
+            {
+              "enum": [
+                16,
+                "LogMode.ERROR_DB"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "required": [
+    "ENV",
+    "BASEPATH",
+    "PKG_PATH",
+    "DATA",
+    "DEBUG",
+    "TESTING",
+    "LOG_LEVEL",
+    "LOG_MODE"
+  ]
+}

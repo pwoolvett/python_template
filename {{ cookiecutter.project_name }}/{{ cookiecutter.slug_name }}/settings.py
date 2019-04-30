@@ -1,3 +1,4 @@
+# coding=utf-8
 """Settings
 
 Set any and all project variables here.
@@ -8,7 +9,85 @@ variables set in this file.
 Optionally, secret stuff is located in the a .env file, to be loaded here.
 """
 import os
+from pathlib import Path
 
-BASEPATH = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
-PKG_PATH = os.path.join(BASEPATH, "{{ cookiecutter.slug_name }}")
-DATA = os.path.join(BASEPATH, "data")
+from {{ cookiecutter.slug_name }}.utils import _parent_rec
+from {{ cookiecutter.slug_name }}.utils._log import LogLevel, LogMode
+from {{ cookiecutter.slug_name }}.utils.base_settings import BaseConfig
+
+
+class Config(BaseConfig):
+    """All common values are defined here"""
+
+    BASEPATH: str = _parent_rec(__file__, 2).as_posix()
+    """Absolute path to the project directory"""
+
+    PKG_PATH: str = Path(BASEPATH).joinpath("{{ cookiecutter.slug_name }}").as_posix()
+    """Absolute path to the package directory"""
+
+    DATA: str = Path(BASEPATH).joinpath("data").as_posix()
+    """Absolute path to the package directory"""
+
+    ENV: str = os.environ["ENV"]
+    """Execution mode of the project
+
+    Must be one of: `production`, `development`, `testing`
+    """
+
+    DEBUG: bool = True
+    """Set to True to enable debugging"""
+
+    TESTING: bool = False
+    """Set to True to enable testing mode"""
+
+    LOG_LEVEL: LogLevel = LogLevel.INFO
+    """Defines the logging level of the Application"""
+
+    LOG_MODE: LogMode = LogMode.CONSOLE | LogMode.ERROR_FILE
+    """Define allowed destinations for logs"""
+
+
+class ProductionConfig(Config):
+    """Production-specific values are defined here"""
+
+    DEBUG = False
+    TESTING = False
+
+    LOG_LEVEL = LogLevel.TRACE
+    LOG_MODE = LogMode.ERROR_FILE | LogMode.TRACE_FILE
+
+
+class DevelopmentConfig(Config):
+    """Development-specific values are defined here"""
+
+    DEBUG = True
+    TESTING = False
+
+    LOG_LEVEL = LogLevel.TRACE
+    LOG_MODE = LogMode.CONSOLE | LogMode.ERROR_FILE
+
+
+class TestingConfig(Config):
+    """Testing-specific values are defined here"""
+
+    DEBUG = True
+    TESTING = True
+
+    LOG_LEVEL = LogLevel.TRACE
+    LOG_MODE = LogMode.CONSOLE
+
+
+def init_settings() -> Config:
+    """Initializes configuration from envvar ´ENV´
+
+    Returns:
+        Config: A schema-validated configuration
+    """
+
+    env = os.environ["ENV"]
+
+    config = Config._from_env(  # pylint: disable=protected-access
+        env, DevelopmentConfig, ProductionConfig, TestingConfig, validate=True
+    )
+
+    return config
