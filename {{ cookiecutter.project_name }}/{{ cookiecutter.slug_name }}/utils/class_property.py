@@ -8,7 +8,8 @@ print(__file__)
 
 class classproperty: # pylint: disable=invalid-name,
     """
-    Same as property(), but passes obj.__class__ instead of obj to fget/fset/fdel.
+    Same as property(), but passes obj.__class__ instead of obj to
+    fget/fset/fdel.
     Original code for property emulation:
     https://docs.python.org/3.5/howto/descriptor.html#properties
     """
@@ -51,7 +52,8 @@ class classproperty: # pylint: disable=invalid-name,
 def classproperty_support(cls):
     """Class decorator to add metaclass to our class.
 
-    Metaclass uses to add descriptors to class attributes, see: http://stackoverflow.com/a/26634248/1113207
+    Metaclass uses to add descriptors to class attributes, see:
+    ` http://stackoverflow.com/a/26634248/1113207`
     """
 
     class Meta(type(cls)):

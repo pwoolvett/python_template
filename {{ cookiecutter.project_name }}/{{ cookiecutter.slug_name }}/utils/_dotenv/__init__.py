@@ -1,7 +1,7 @@
 # coding=utf-8
 """Loads `.env` & equip os.environ with `get_int` and similar methods"""
 import os
-from pathlib import Path
+
 from dotenv import load_dotenv
 
 from {{ cookiecutter.slug_name }}.utils import _parent_rec

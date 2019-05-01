@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 """Common functions used as utilities"""
 
-import os
 from pathlib import Path
 from typing import Union
 
