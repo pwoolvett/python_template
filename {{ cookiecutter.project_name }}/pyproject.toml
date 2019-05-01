@@ -24,7 +24,6 @@
   fire = "^0.1.3"
   tzlocal = "^1.5"
   jsonschema = "^3.0"
-  l
   {{- '\n  pandas = "^0.23.4"' if "pandas" in cookiecutter.additional_libs else '' -}}
   {{- '\n  tqdm = "^4.28"' if "tqdm" in cookiecutter.additional_libs else '' }}
 
@@ -34,6 +33,7 @@
   {{- '\n  black = { version = "*", allows-prereleases = true }' if "black" in cookiecutter.formatter else '' -}}
 
   {{- '\n  pylint = "^2.3"' if "mypy" in cookiecutter.linter else '' -}}
+  {{- '\n  flake8 = "^3.7"' if "flake8" in cookiecutter.linter else '' -}}
   {{- '\n  mypy = "^0.701"\n  mypy-extensions = "^0.4"' if "flake8" in cookiecutter.linter else '' -}}
   {{- '\n  bandit = "^1.5"' if "bandit" in cookiecutter.linter else '' -}}
 
@@ -48,7 +48,7 @@
   {{- '\n  sphinx-autodoc-typehints = "^1.5"' if "autodoc" in cookiecutter.linter else '' }}
 
 [tool.settings-schema]
-schema = "http://json-schema.org/draft-07/schema#"
+  schema = "http://json-schema.org/draft-07/schema#"
 
 [build-system]
   requires = ["poetry>=0.12", "pip<=19.0.3"]{# pip 19.1 (2019-04-23) breaks editable installs with pyproject.toml #}

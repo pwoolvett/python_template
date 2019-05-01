@@ -232,7 +232,7 @@ def main():
     configure_git()
     create_virtualenv()
 
-    
+
     import this  # noqa
 
     print(SUCCESS + "Project initialized, keep up the good work!" + TERMINATOR)
