@@ -221,13 +221,19 @@ def create_virtualenv():
     _exec("tox -e venv")
     print(INFO + "Virtual environment configured and libraries installed" + TERMINATOR)
 
+def update_dependencies():
+    """Update dependencies defined in `pyproject.toml` and `poetry.lock`"""
+
+    print(INFO + "Updating dependencies" + TERMINATOR)
+    _exec("poetry update --no-interaction")
+    print(INFO + "Done updating dependencies" + TERMINATOR)
+
 def run_tests():
     """Run all tests as defined in `tox.ini`"""
 
     print(INFO + "Running tox tests" + TERMINATOR)
     _exec("tox -- --runslow")
     print(INFO + "tox tests ran and passed!" + TERMINATOR)
-
 
 def main():
     """Runs all checks, removes useless files, initializes project"""
@@ -238,6 +244,7 @@ def main():
     config_docs()
     configure_git()
     create_virtualenv()
+    update_dependencies()
     run_tests()
 
 
