@@ -7,7 +7,7 @@
   "release": "pre-alpha",
   "description": null,
   "project_short_description": "{{ cookiecutter.description }}",
-  "max_line_length": "88",
+  "max_line_length": "79",
   "license": [
     "none",
     "MIT",

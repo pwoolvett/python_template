@@ -1,3 +1,5 @@
+{{ "[tool.black]\nline-length = "+cookiecutter.max_line_length+"\ntarget-version = ['py37']\n\n" if "black" in cookiecutter.formatter else '' -}}
+{{- '' -}}
 [tool.poetry]
   project_name = "{{ cookiecutter.project_name }}"
   name = "{{ cookiecutter.slug_name }}"
@@ -10,9 +12,9 @@
     "{{ cookiecutter.author }}"
   ]
   maintainer = "{{ cookiecutter.author_name }} <{{ cookiecutter.author_mail }}>"
-  {{- '\n  license = "{{ cookiecutter.license }}"' if cookiecutter.license != "" else '' -}}
-  {{- '\n  copyright = "{{ cookiecutter.copyright }}"'  if cookiecutter.copyright != "" else '' -}}
-  {{- '\n  url = "{{ cookiecutter.url }}"' if cookiecutter.url != "" else '' }}
+  {{- '\n  license = '+ cookiecutter.license if cookiecutter.license != "none" else '' -}}
+  {{- '\n  copyright = '+cookiecutter.copyright if cookiecutter.copyright != "" else '' -}}
+  {{- '\n  url = '+cookiecutter.url if cookiecutter.url != "" else '' }}
 
 
 [tool.poetry.scripts]
@@ -35,9 +37,9 @@
   {{- '\n  autopep8 = "^1.4"' if "autopep8" in cookiecutter.formatter else '' -}}
   {{- '\n  black = { version = "*", allows-prereleases = true }' if "black" in cookiecutter.formatter else '' -}}
 
-  {{- '\n  pylint = "^2.3"' if "mypy" in cookiecutter.linter else '' -}}
-  {{- '\n  flake8 = "^3.7"' if "flake8" in cookiecutter.linter else '' -}}
-  {{- '\n  mypy = "^0.701"\n  mypy-extensions = "^0.4"' if "flake8" in cookiecutter.linter else '' -}}
+  {{- '\n  pylint = "^2.3"' if "pylint" in cookiecutter.linter else '' -}}
+  {{- '\n  flake8 = "^3.7"\n  flake8-bugbear = "^19.3"' if "flake8" in cookiecutter.linter else '' -}}
+  {{- '\n  mypy = "^0.701"\n  mypy-extensions = "^0.4"' if "mypy" in cookiecutter.linter else '' -}}
   {{- '\n  bandit = "^1.5"' if "bandit" in cookiecutter.linter else '' -}}
 
   {{- '\n  pytest = "^4.0"' if "pytest" in cookiecutter.testing else '' -}}
@@ -46,9 +48,9 @@
   {{- '\n  hypothesis = "^4.17"' if "hypothesis" in cookiecutter.testing else '' -}}
   {{- '\n  behave = "^1.2"' if "behave" in cookiecutter.testing else '' -}}
 
-  {{- '\n  Sphinx = "^1.8"' if "sphinx" in cookiecutter.linter else '' -}}
-  {{- '\n  sphinx_rtd_theme = "^0.4.2"' if "rtd" in cookiecutter.linter else '' -}}
-  {{- '\n  sphinx-autodoc-typehints = "^1.5"' if "autodoc" in cookiecutter.linter else '' }}
+  {{- '\n  Sphinx = "^1.8"' if "sphinx" in cookiecutter.docs else '' -}}
+  {{- '\n  sphinx_rtd_theme = "^0.4.2"' if "rtd" in cookiecutter.docs else '' -}}
+  {{- '\n  sphinx-autodoc-typehints = "^1.5"' if "autodoc" in cookiecutter.docs else '' }}
 
 [tool.settings-schema]
   schema = "http://json-schema.org/draft-07/schema#"

@@ -6,11 +6,13 @@
 
 """
 
-from {{ cookiecutter.slug_name }}.utils._log import create_logger
-from {{ cookiecutter.slug_name }}.utils._dotenv import DOTENV_LOCATION
+from {{ cookiecutter.slug_name }}._meta.log import create_logger
+from {{ cookiecutter.slug_name }}._meta.dotenv_ import DOTENV_LOCATION
+from {{ cookiecutter.slug_name }}._meta.metadata import Metadata
 from {{ cookiecutter.slug_name }} import settings
 
 S = settings.init_settings()
+__meta__ = Metadata()
 logger = create_logger(S.LOG_LEVEL, S.LOG_MODE)  # pylint: disable=invalid-name
 
 logger.info("Using variables from `%s`", DOTENV_LOCATION)

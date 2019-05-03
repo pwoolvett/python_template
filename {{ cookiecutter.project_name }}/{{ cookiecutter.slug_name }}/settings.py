@@ -11,18 +11,18 @@ Optionally, secret stuff is located in the a .env file, to be loaded here.
 import os
 from pathlib import Path
 
-from {{ cookiecutter.slug_name }}.utils import _parent_rec
-from {{ cookiecutter.slug_name }}.utils._log import LogLevel, LogMode
-from {{ cookiecutter.slug_name }}.utils.base_settings import BaseConfig
+from {{ cookiecutter.slug_name }}.utils.io import nth_parent
+from {{ cookiecutter.slug_name }}._meta.log import LogLevel, LogMode
+from {{ cookiecutter.slug_name }}._meta.base_settings import BaseConfig
 
 
 class Config(BaseConfig):
     """All common values are defined here"""
 
-    BASEPATH: str = _parent_rec(__file__, 2).as_posix()
+    BASEPATH: str = nth_parent(__file__, 2).as_posix()
     """Absolute path to the project directory"""
 
-    PKG_PATH: str = Path(BASEPATH).joinpath("{{ cookiecutter.slug_name }}").as_posix()
+    PKG_PATH: str = Path(BASEPATH).joinpath("project_sample").as_posix()
     """Absolute path to the package directory"""
 
     DATA: str = Path(BASEPATH).joinpath("data").as_posix()
@@ -50,6 +50,7 @@ class Config(BaseConfig):
 class ProductionConfig(Config):
     """Production-specific values are defined here"""
 
+    ENV = "production"
     DEBUG = False
     TESTING = False
 
@@ -60,6 +61,7 @@ class ProductionConfig(Config):
 class DevelopmentConfig(Config):
     """Development-specific values are defined here"""
 
+    ENV = "development"
     DEBUG = True
     TESTING = False
 
@@ -70,6 +72,7 @@ class DevelopmentConfig(Config):
 class TestingConfig(Config):
     """Testing-specific values are defined here"""
 
+    ENV = "testing"
     DEBUG = True
     TESTING = True
 
@@ -86,8 +89,6 @@ def init_settings() -> Config:
 
     env = os.environ["ENV"]
 
-    config = Config._from_env(  # pylint: disable=protected-access
-        env, DevelopmentConfig, ProductionConfig, TestingConfig, validate=True
-    )
+    config = Config.from_env(env, validate=True)
 
     return config

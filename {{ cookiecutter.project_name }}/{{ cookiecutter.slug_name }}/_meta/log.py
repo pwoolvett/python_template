@@ -11,6 +11,8 @@ import logzero
 from logzero import LOGZERO_INTERNAL_LOGGER_ATTR
 import tzlocal
 
+from {{ cookiecutter.slug_name }}.utils.io import nth_parent
+
 
 class LogLevel(IntEnum):
     """Explicitly define allowed logging levels"""
@@ -57,9 +59,7 @@ class LoggerFormatter(logzero.LogFormatter):
     _datefmt = "%Y/%m/%d@%H:%M:%S"  # "%Y-%m-%dT%H:%M:%S%z"
 
     def __init__(self):
-        super(LoggerFormatter, self).__init__(
-            fmt=self._fmt, datefmt=self._datefmt
-        )
+        super(LoggerFormatter, self).__init__(fmt=self._fmt, datefmt=self._datefmt)
 
 
 class Console(LoggerFormatter):
@@ -127,7 +127,7 @@ def create_logger(level: LogLevel, mode: LogMode) -> logging.Logger:
 
         if mode & LogMode.TRACE_FILE:
             _attach_file_handler(
-                "logs/trace-logfile.log",
+                nth_parent(__file__, 3).joinpath("logs/trace-logfile.log"),
                 _logger,
                 file_formatter,
                 autologging.TRACE,
@@ -135,7 +135,10 @@ def create_logger(level: LogLevel, mode: LogMode) -> logging.Logger:
 
         if mode & LogMode.ERROR_FILE:
             _attach_file_handler(
-                "logs/errors.log", _logger, file_formatter, logging.ERROR
+                nth_parent(__file__, 3).joinpath("logs/errors.log"),
+                _logger,
+                file_formatter,
+                logging.ERROR,
             )
 
     return _logger

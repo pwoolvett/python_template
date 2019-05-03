@@ -1,12 +1,16 @@
 # -*- coding: utf-8 -*-
-"""
+"""`@classproperty` decorator for methods.
 
 See Also:
     https://stackoverflow.com/questions/3203286/how-to-create-a-read-only-class-property-in-python
 """
-print(__file__)
+# pylint: disable=missing-docstring
+# pylint: disable=too-few-public-methods
+# pylint: disable=invalid-name
+# pylint: disable=invalid-metaclass
 
-class classproperty: # pylint: disable=invalid-name,
+
+class classproperty:
     """
     Same as property(), but passes obj.__class__ instead of obj to
     fget/fset/fdel.
@@ -53,7 +57,7 @@ def classproperty_support(cls):
     """Class decorator to add metaclass to our class.
 
     Metaclass uses to add descriptors to class attributes, see:
-    ` http://stackoverflow.com/a/26634248/1113207`
+    `http://stackoverflow.com/a/26634248/1113207`
     """
 
     class Meta(type(cls)):
