@@ -221,6 +221,13 @@ def create_virtualenv():
     _exec("tox -e venv")
     print(INFO + "Virtual environment configured and libraries installed" + TERMINATOR)
 
+def run_tests():
+    """Run all tests as defined in `tox.ini`"""
+
+    print(INFO + "Running tox tests" + TERMINATOR)
+    _exec("tox -- --runslow")
+    print(INFO + "tox tests ran and passed!" + TERMINATOR)
+
 
 def main():
     """Runs all checks, removes useless files, initializes project"""
@@ -231,6 +238,7 @@ def main():
     config_docs()
     configure_git()
     create_virtualenv()
+    run_tests()
 
 
     import this  # noqa
