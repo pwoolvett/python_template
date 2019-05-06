@@ -77,7 +77,7 @@
     "production"
   ],
   "author_name": null,
-  "author_mail": "{{ email }}",
+  "author_mail": null,
   "author": "{{ cookiecutter.author_name }} <{{ cookiecutter.author_mail }}>",
   "authors": "[{{ cookiecutter.author }},]",
   "maintainer": "{{ cookiecutter.author }}",

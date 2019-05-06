@@ -245,7 +245,7 @@ def main():
     configure_git()
     create_virtualenv()
     update_dependencies()
-    run_tests()
+    # run_tests()
 
     print(SUCCESS + "Project initialized, keep up the good work!" + TERMINATOR)
     
