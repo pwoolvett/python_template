@@ -80,11 +80,11 @@ class TestingConfig(Config):
     LOG_MODE = LogMode.CONSOLE
 
 
-def init_settings() -> 'BaseConfig':
+def init_settings() -> 'Config':
     """Initializes configuration from envvar ´ENV´
 
     Returns:
-        BaseConfig: A schema-validated configuration
+        Config: A schema-validated configuration
     """
 
     env = os.environ["ENV"]
