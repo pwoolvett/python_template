@@ -247,10 +247,9 @@ def main():
     update_dependencies()
     run_tests()
 
-
-    import this  # noqa
-
     print(SUCCESS + "Project initialized, keep up the good work!" + TERMINATOR)
+    
+    import this  # noqa
 
 if __name__ == "__main__":
     main()
