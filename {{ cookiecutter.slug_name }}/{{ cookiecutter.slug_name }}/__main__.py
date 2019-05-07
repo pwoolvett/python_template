@@ -6,9 +6,9 @@ from fire import Fire as _Fire_
 
 from {{ cookiecutter.slug_name }} import scripts
 
-if __name__ == "__main__":
-    _Fire_(scripts)
-else:
 
-    def _Fire():  # pylint: disable=invalid-name
-        return _Fire_(scripts)
+def main(): # pylint: disable=missing-docstring
+    _Fire_(scripts)
+
+if __name__ == "__main__":
+    main()

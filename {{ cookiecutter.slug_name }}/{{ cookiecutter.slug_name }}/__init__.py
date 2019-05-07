@@ -13,7 +13,9 @@ from {{ cookiecutter.slug_name }} import settings
 
 S = settings.init_settings()
 __meta__ = Metadata()
-logger = create_logger(S.LOG_LEVEL, S.LOG_MODE)  # pylint: disable=invalid-name
+logger = create_logger(  # pylint: disable=invalid-name
+    S.LOG_LEVEL, S.LOG_MODE, logs_folder=S.LOG_STORAGE
+)
 
 logger.info("Using variables from `%s`", DOTENV_LOCATION)
 logger.debug("Full config :\n`%s`", S.to_str(compact=False, indent=2))

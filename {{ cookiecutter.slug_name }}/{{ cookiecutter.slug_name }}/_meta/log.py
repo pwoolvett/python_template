@@ -5,13 +5,12 @@
 import logging
 from datetime import datetime
 from enum import IntFlag, IntEnum
+from pathlib import Path
 
 import autologging
 import logzero
 from logzero import LOGZERO_INTERNAL_LOGGER_ATTR
 import tzlocal
-
-from {{ cookiecutter.slug_name }}.utils.io import nth_parent
 
 
 class LogLevel(IntEnum):
@@ -97,12 +96,13 @@ def _attach_file_handler(filename, _logger, file_formatter, level):
     _logger.addHandler(rotating_filehandler)
 
 
-def create_logger(level: LogLevel, mode: LogMode) -> logging.Logger:
+def create_logger(level: LogLevel, mode: LogMode, logs_folder: str) -> logging.Logger:
     """Configures custom  logger to files/console/db.
 
     Args:
         level (LogLevel): The logging level for the logger.
         mode (LogMode): Where to log. See `LogMode`.
+        logs_folder (str): Where to store logs.
 
     Returns:
         logging.Logger: The configured logger object.
@@ -112,7 +112,7 @@ def create_logger(level: LogLevel, mode: LogMode) -> logging.Logger:
     requires_files = mode & (LogMode.TRACE_FILE | LogMode.ERROR_FILE)
     requires_db = mode & (LogMode.TRACE_DB | LogMode.ERROR_DB)
 
-    if requires_db:
+    if requires_db:  # pragma: no cover
         raise NotImplementedError("RDBMS-based logging not implemented")
 
     _logger = logzero.setup_logger(
@@ -127,7 +127,7 @@ def create_logger(level: LogLevel, mode: LogMode) -> logging.Logger:
 
         if mode & LogMode.TRACE_FILE:
             _attach_file_handler(
-                nth_parent(__file__, 3).joinpath("logs/trace-logfile.log"),
+                Path(logs_folder).joinpath("trace.log"),
                 _logger,
                 file_formatter,
                 autologging.TRACE,
@@ -135,7 +135,7 @@ def create_logger(level: LogLevel, mode: LogMode) -> logging.Logger:
 
         if mode & LogMode.ERROR_FILE:
             _attach_file_handler(
-                nth_parent(__file__, 3).joinpath("logs/errors.log"),
+                Path(logs_folder).joinpath("errors.log"),
                 _logger,
                 file_formatter,
                 logging.ERROR,

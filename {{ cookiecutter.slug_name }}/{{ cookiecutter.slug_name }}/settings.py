@@ -46,6 +46,9 @@ class Config(BaseConfig):
     LOG_MODE: LogMode = LogMode.CONSOLE | LogMode.ERROR_FILE
     """Define allowed destinations for logs"""
 
+    LOG_STORAGE: str = Path(BASEPATH).joinpath("logs").as_posix()
+    """Where to store the log files if `LOG_MODE` uses any"""
+
 
 class ProductionConfig(Config):
     """Production-specific values are defined here"""
@@ -80,7 +83,7 @@ class TestingConfig(Config):
     LOG_MODE = LogMode.CONSOLE
 
 
-def init_settings() -> 'Config':
+def init_settings() -> "Config":
     """Initializes configuration from envvar ´ENV´
 
     Returns:
