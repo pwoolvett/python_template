@@ -50,6 +50,7 @@
   {{- '\n  behave = "^1.2"' if "behave" in cookiecutter.testing else '' -}}
 
   {{- '\n  Sphinx = "^1.8"' if "sphinx" in cookiecutter.docs else '' -}}
+  {{- '\n  doc8 = "^0.8"' if "sphinx" in cookiecutter.docs else '' -}}
   {{- '\n  sphinx_rtd_theme = "^0.4.2"' if "rtd" in cookiecutter.docs else '' -}}
   {{- '\n  sphinx-autodoc-typehints = "^1.5"' if "autodoc" in cookiecutter.docs else '' }}
 
