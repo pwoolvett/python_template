@@ -1,0 +1,86 @@
+{
+  "[python]": {
+    "editor.copyWithSyntaxHighlighting": true,
+    "editor.rulers": [
+      72,
+      79,
+      88,
+      99
+    ]
+  },
+  "autoDocstring.docstringFormat": "google",
+  "breadcrumbs.enabled": true,
+  "python.pythonPath": ".venv/bin/python",
+  "restructuredtext.confPath": "${workspaceFolder}/{{ cookiecutter.project_name }}/docs/source",
+  "python.envFile": "${workspaceFolder}/.env",
+  "python.formatting.blackArgs": [
+    "--line-length",
+    "{{ cookiecutter.max_line_length }}"
+  ],
+  {{- '\n  "python.formatting.provider": "black",' if "black" in cookiecutter.formatter else '\n' -}}
+  {{- '\n  ""python.linting.banditEnabled": "black",' if "black" in cookiecutter.formatter else '\n' -}}
+   {{ 'true' if "bandit" in cookiecutter.linter else '' -}},
+  "python.linting.mypyEnabled":  {{ 'true' if "mypy" in cookiecutter.linter else '' -}},
+  "python.linting.flake8Args": [
+    "--max-line-length",
+    "{{ cookiecutter.max_line_length }}",
+    "--max-complexity",
+    "10"
+  ],
+  {{- '\n  "python.linting.flake8CategorySeverity.F": "Warning",\n  "python.linting.flake8Enabled": true,' if "flake8" in cookiecutter.linter else '\n' -}},
+  "python.linting.pylintArgs": [
+    "--max-line-length",
+    "{{ cookiecutter.max_line_length }}",
+    "--notes",
+    "TODO,FIXME,BUG,NOBUG,REQ,RFE,IDEA,WTF,ALERT,HACK,PORT,CAVEAT,NOTE,REF,TODOC,CRED",
+    "--good-names",
+    "a,i,j,k,_,x,y,fp,v, df",
+    "--disable",
+    "C0330",
+  ],
+  {{- '\n  "python.linting.pylintEnabled": true,' if "pylint" in cookiecutter.linter else '\n' -}},
+  "python.terminal.activateEnvironment": false,
+  "python.venvPath": "${workspaceFolder}/.venv",
+  "editor.autoClosingBrackets": "always",
+  "editor.fontFamily": "'Fira Code'",
+  "editor.fontLigatures": true,
+  "editor.minimap.renderCharacters": false,
+  "editor.mouseWheelZoom": true,
+  "editor.renderControlCharacters": true,
+  "editor.renderWhitespace": "all",
+  "editor.rulers": [
+    88,
+    120
+  ],
+  "editor.suggestSelection": "first",
+  "editor.scrollbar.vertical": "hidden",
+  "editor.overviewRulerBorder": false,
+  "editor.trimAutoWhitespace": false,
+  "editor.useTabStops": false,
+  "files.associations": {
+    ".env.dist": "dotenv"
+  },
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true,
+  "workbench.colorCustomizations": {
+    "diffEditor.insertedTextBackground": "#ffff0055",
+    "diffEditor.removedTextBackground": "#FF000055",
+    "editorError.foreground": "#ff000077",
+    "editorInfo.foreground": "#9dff0077",
+    "editorRuler.foreground": "#8181bb",
+    "editorWarning.foreground": "#ffff0077",
+    "titleBar.backgroundColor": "#000000",
+    "activityBar.background": "#c26de5",
+    "activityBar.foreground": "#15202b",
+    "activityBar.inactiveForeground": "#15202b99",
+    "activityBarBadge.background": "#ecd293",
+    "activityBarBadge.foreground": "#15202b",
+    "titleBar.activeBackground": "#b042dd",
+    "titleBar.inactiveBackground": "#b042dd99",
+    "titleBar.activeForeground": "#e7e7e7",
+    "titleBar.inactiveForeground": "#e7e7e799",
+    "statusBar.background": "#b042dd",
+    "statusBarItem.hoverBackground": "#c26de5",
+    "statusBar.foreground": "#e7e7e7"
+  },
+}
