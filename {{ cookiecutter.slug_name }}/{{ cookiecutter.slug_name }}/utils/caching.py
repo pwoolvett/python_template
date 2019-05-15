@@ -47,7 +47,8 @@ def cached_output(
 ) -> Callable:
     """Decorate a function to store its result as a pickle.
 
-    Appends two additional kwargs are `__location__` and `__force__`.
+    Appends three additional dunder kwargs: `location`, `force`, and
+    `logger`.
 
     Args:
         logger (logging.Logger): Logger to report.
