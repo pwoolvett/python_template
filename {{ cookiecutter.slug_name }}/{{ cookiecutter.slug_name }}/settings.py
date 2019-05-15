@@ -22,7 +22,7 @@ class Config(BaseConfig):
     BASEPATH: str = nth_parent(__file__, 2).as_posix()
     """Absolute path to the project directory"""
 
-    PKG_PATH: str = Path(BASEPATH).joinpath("project_sample").as_posix()
+    PKG_PATH: str = Path(BASEPATH).joinpath("{{ cookiecutter.slug_name }}").as_posix()
     """Absolute path to the package directory"""
 
     DATA: str = Path(BASEPATH).joinpath("data").as_posix()

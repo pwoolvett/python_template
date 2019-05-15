@@ -11,16 +11,22 @@
    :target: https://codeclimate.com/github/pwoolvett/python_template/maintainability
    :alt: Maintainability
 
+Requirements
+---
 
-1. clone
-2. refactor "package" folder
+* cookiecutter
+* poetry (must be in PATH)
+* tox (must be in PATH)
+* python>=3.6
+
+Usage:
+---
+
+1. `cookiecutter https://github.com/pwoolvett/python_template`
+2. Answer questions properly
 3. enjoy!
 
-reqs:
-  cookiecutter
-  poetry
-  tox
-  python>=3.6
+
 
 for dev:
   :code:`tox -e env` creates virtualenv located at .venv

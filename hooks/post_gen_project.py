@@ -5,6 +5,7 @@ import os
 import sys
 from shutil import copy2 as copy, rmtree
 import subprocess  # nosec
+from functools import wraps
 
 TERMINATOR = "\x1b[0m"
 WARNING = "\x1b[1;33m [WARNING]: "
@@ -60,6 +61,25 @@ AUTHOR = "{{ cookiecutter.author }}"
 AUTHORS = "{{ cookiecutter.authors }}"
 MAINTAINER = "{{ cookiecutter.maintainer }}"
 
+
+def can_fail(function) -> callable:
+    """Decorator to report exceptions instead of raising
+    
+    Args:
+        function (callable): the function to decorate.
+    
+    Returns:
+        callable: The decorated function.
+    """
+    
+    @wraps(function)
+    def wrapped(*a, **kw):
+        try:
+            return function(*a, **kw)
+        except Exception as err:
+            print(WARNING+ err+TERMINATOR)
+            
+    return wrapped
 
 def ass_ert(variable, string):
     """Assert with print and sysexit"""
@@ -214,6 +234,7 @@ def configure_git():
 
     print(SUCCESS + "GIT setup completed" + TERMINATOR)
 
+@can_fail
 def create_virtualenv():
     """install virtualenv into ./.venv/ and run poetry install"""
 
@@ -221,6 +242,7 @@ def create_virtualenv():
     _exec("tox -e venv")
     print(INFO + "Virtual environment configured and libraries installed" + TERMINATOR)
 
+@can_fail
 def update_dependencies():
     """Update dependencies defined in `pyproject.toml` and `poetry.lock`"""
 
@@ -228,6 +250,7 @@ def update_dependencies():
     _exec("poetry update --no-interaction")
     print(INFO + "Done updating dependencies" + TERMINATOR)
 
+@can_fail
 def run_tests():
     """Run all tests as defined in `tox.ini`"""
 
