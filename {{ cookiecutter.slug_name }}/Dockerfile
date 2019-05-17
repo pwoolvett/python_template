@@ -20,4 +20,4 @@ RUN "poetry install --no-dev -vvv"
 
 ADD . /app
 
-CMD python3 {{ cookiecutter.slug_name }}
+CMD {{ cookiecutter.slug_name }}

@@ -28,7 +28,7 @@ class Config(BaseConfig):
     DATA: str = Path(BASEPATH).joinpath("data").as_posix()
     """Absolute path to the package directory"""
 
-    ENV: str = os.environ["ENV"]
+    ENV: str
     """Execution mode of the project
 
     Must be one of: `production`, `development`, `testing`

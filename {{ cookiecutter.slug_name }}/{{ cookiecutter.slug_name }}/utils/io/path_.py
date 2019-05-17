@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Several io-related utilities"""
+"""Several path-related utilities"""
 
 from pathlib import Path
 from typing import Union

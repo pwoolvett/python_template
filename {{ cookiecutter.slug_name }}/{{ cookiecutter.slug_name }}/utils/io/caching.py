@@ -7,10 +7,12 @@ import logging
 
 from pathlib import Path
 
+from {{ cookiecutter.slug_name }} import logger
+
 PICKLE_EXTENSIONS = {".pickle", ".pkl"}
 
 
-def define_save_load(logger, location):
+def define_save_load(location):
     """Save and load are noops if location is not pickle"""
 
     if any(location.endswith(ext) for ext in PICKLE_EXTENSIONS):
@@ -42,16 +44,12 @@ def define_save_load(logger, location):
     return save, load
 
 
-def cached_output(
-    logger: logging.Logger, location: str, force: bool = False
-) -> Callable:
+def cached_output(location: str, force: bool = False) -> Callable:
     """Decorate a function to store its result as a pickle.
 
-    Appends three additional dunder kwargs: `location`, `force`, and
-    `logger`.
+    Appends two additional dunder kwargs: `__location__` & `__force__`.
 
     Args:
-        logger (logging.Logger): Logger to report.
         location (str): Where to store the cached result.
         force (bool, optional): Whether to call the function even if a
         cached result already exists. Defaults to False.
@@ -64,13 +62,12 @@ def cached_output(
         @wraps(function)
         def wrapper(
             *args,
-            __logger__=logger,
             __location__=location,
             __force__=force,
             **kwargs,
         ):
 
-            save, load = define_save_load(__logger__, __location__)
+            save, load = define_save_load(__location__)
 
             if __force__ or not Path(__location__).exists():
                 result = function(*args, **kwargs)
@@ -80,7 +77,7 @@ def cached_output(
                     result = load(__location__)
 
                 except (EOFError, pickle.UnpicklingError) as error:
-                    __logger__.error(
+                    logger.error(
                         "Error %s in %s. Calling again ...",
                         type(error),
                         __location__,
