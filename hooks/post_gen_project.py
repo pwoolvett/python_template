@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+# !/usr/bin/env python
 """Execute conditional processes depending con cookiecutter variables
 """
 import os
@@ -196,6 +196,7 @@ def config_tests():
 
     print(SUCCESS + "Testing setup completed" + TERMINATOR)
 
+
 def config_docs():
     """Sets up docs and sphinx, if required"""
 
@@ -267,8 +268,8 @@ def main():
     config_docs()
     configure_git()
     create_virtualenv()
-    update_dependencies()
-    run_tests()
+    # update_dependencies()
+    # run_tests()
 
     print(SUCCESS + "Project initialized, keep up the good work!" + TERMINATOR)
     
