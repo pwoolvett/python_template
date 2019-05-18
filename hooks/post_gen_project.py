@@ -71,15 +71,17 @@ def can_fail(function) -> callable:
     Returns:
         callable: The decorated function.
     """
-    
+
     @wraps(function)
     def wrapped(*a, **kw):
         try:
             return function(*a, **kw)
         except Exception as err:
-            print(WARNING+ err+TERMINATOR)
-            
+            print(WARNING + str(err) + TERMINATOR)
+            return 0
+
     return wrapped
+
 
 def ass_ert(variable, string):
     """Assert with print and sysexit"""
@@ -121,7 +123,7 @@ def create_dotenv():
 
     Uses .env.dist as a base, and sets `ENV=cookiecutter.default_env`
     """
-    
+
     print(INFO + "Creating and configuring `.env` file" + TERMINATOR)
     copy(".env.dist", ".env")
 
@@ -129,6 +131,7 @@ def create_dotenv():
         dotenv.write(f"ENV={DEFAULT_ENV}\n")
 
     print(SUCCESS + "`.env` file created and cofigured" + TERMINATOR)
+
 
 def config_license():
     """May delete license-related files"""
@@ -139,11 +142,11 @@ def config_license():
     if "GPLv3" not in LICENSE:
         file_names.append("COPYING")
 
-    if not LICENSE:
+    if LICENSE in NO:
         file_names.extend(("CONTRIBUTORS.txt", "LICENSE"))
-        
+
     _delete_or_raise(file_names)
-    
+
     print(SUCCESS + "Project license configured" + TERMINATOR)
 
 
@@ -179,7 +182,9 @@ def config_tests():
         file_names, dir_names = [], []
         hyp_files = (
             os.path.join("tests", "features", "gherkin_hypothesis.feature"),
-            os.path.join("tests", "features", "steps", "gherkin_hypothesis.py"),
+            os.path.join(
+                "tests", "features", "steps", "gherkin_hypothesis.py"
+            ),
             os.path.join("tests", "unit", "test_002_hypothesis.py"),
         )
 
@@ -235,13 +240,23 @@ def configure_git():
 
     print(SUCCESS + "GIT setup completed" + TERMINATOR)
 
+
 @can_fail
 def create_virtualenv():
     """install virtualenv into ./.venv/ and run poetry install"""
 
-    print(INFO + "Configuring virtual environment and installing libraries" + TERMINATOR)
+    print(
+        INFO
+        + "Configuring virtual environment and installing libraries"
+        + TERMINATOR
+    )
     _exec("tox -e venv")
-    print(INFO + "Virtual environment configured and libraries installed" + TERMINATOR)
+    print(
+        INFO
+        + "Virtual environment configured and libraries installed"
+        + TERMINATOR
+    )
+
 
 @can_fail
 def update_dependencies():
@@ -251,6 +266,7 @@ def update_dependencies():
     _exec("poetry update --no-interaction")
     print(INFO + "Done updating dependencies" + TERMINATOR)
 
+
 @can_fail
 def run_tests():
     """Run all tests as defined in `tox.ini`"""
@@ -258,6 +274,7 @@ def run_tests():
     print(INFO + "Running tox tests" + TERMINATOR)
     _exec("tox -- --runslow")
     print(INFO + "tox tests ran and passed!" + TERMINATOR)
+
 
 def main():
     """Runs all checks, removes useless files, initializes project"""
@@ -272,8 +289,9 @@ def main():
     # run_tests()
 
     print(SUCCESS + "Project initialized, keep up the good work!" + TERMINATOR)
-    
+
     import this  # noqa
+
 
 if __name__ == "__main__":
     main()
