@@ -4,7 +4,7 @@ import pytest
 from pydantic import ValidationError
 
 
-def setup_module(module):
+def setup_function():
     """Make sure {{ cookiecutter.slug_name }} has not been imported
 
     Because tests are changing dotenv variables in runtime, the project
@@ -28,6 +28,7 @@ def setup_module(module):
     ],
 )
 def test_environment(monkeypatch, varname, varval, err_cls):
+    
     with monkeypatch.context() as patcher, pytest.raises(err_cls):
         patcher.setitem(os.environ, varname, varval)
         print(f"\nDOTENV_LOCATION: {os.environ['DOTENV_LOCATION']}")

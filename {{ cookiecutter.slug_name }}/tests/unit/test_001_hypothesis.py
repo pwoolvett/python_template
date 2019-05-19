@@ -12,10 +12,12 @@ SAFE_FLOATS = floats(
     max_value=1.34e+154
 )
 
+
 @pytest.mark.xfail
 @given(ANY_FLOATS)
 def test_hypothesis_sqrt_all(num):
     assert abs(num - ((num ** 2) ** 0.5)) < EPSILON
+
 
 @given(SAFE_FLOATS)
 def test_hypothesis_sqrt_non_negative(num):

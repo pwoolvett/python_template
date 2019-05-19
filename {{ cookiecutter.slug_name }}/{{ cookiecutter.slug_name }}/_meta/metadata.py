@@ -1,15 +1,18 @@
 # -*- coding: utf-8 -*-
 """Meta-info for the project, as read from`pyproject.toml`"""
-import toml
 
-from {{ cookiecutter.slug_name }}.utils.io import nth_parent
+from pathlib import Path
+
+import toml
 
 
 class Metadata:  # pylint: disable=too-few-public-methods,
     """Lazy-loader for attributes found in `[tool.poetry]`"""
 
     def __init__(self):
-        self.pyproject_file = nth_parent(__file__, 3).joinpath("pyproject.toml")
+        self.pyproject_file = Path(__file__).parent.parent.parent.joinpath(
+            "pyproject.toml"
+        )
         if not self.pyproject_file.exists():
             raise FileNotFoundError(self.pyproject_file)  # pragma: no cover
 

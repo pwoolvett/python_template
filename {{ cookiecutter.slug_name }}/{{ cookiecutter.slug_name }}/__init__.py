@@ -6,12 +6,10 @@
 
 """
 
-from {{ cookiecutter.slug_name }}._meta.log import create_logger
-from {{ cookiecutter.slug_name }}._meta.dotenv_ import DOTENV_LOCATION
-from {{ cookiecutter.slug_name }}._meta.metadata import Metadata
-from {{ cookiecutter.slug_name }} import settings
+from {{ cookiecutter.slug_name }}._meta import DOTENV_LOCATION, create_logger, Metadata
+from {{ cookiecutter.slug_name }}.settings import init_settings
 
-S = settings.init_settings()
+S = init_settings()
 __meta__ = Metadata()
 logger = create_logger(  # pylint: disable=invalid-name
     S.LOG_LEVEL, S.LOG_MODE, logs_folder=S.LOG_STORAGE

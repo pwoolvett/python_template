@@ -11,15 +11,13 @@ Optionally, secret stuff is located in the a .env file, to be loaded here.
 import os
 from pathlib import Path
 
-from {{ cookiecutter.slug_name }}.utils.io import nth_parent
-from {{ cookiecutter.slug_name }}._meta.log import LogLevel, LogMode
-from {{ cookiecutter.slug_name }}._meta.base_settings import BaseConfig
+from {{ cookiecutter.slug_name }}._meta import LogLevel, LogMode, BaseConfig
 
 
 class Config(BaseConfig):
     """All common values are defined here"""
 
-    BASEPATH: str = nth_parent(__file__, 2).as_posix()
+    BASEPATH: str = Path(__file__).parent.parent.as_posix()
     """Absolute path to the project directory"""
 
     PKG_PATH: str = Path(BASEPATH).joinpath("{{ cookiecutter.slug_name }}").as_posix()

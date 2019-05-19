@@ -1,5 +1,5 @@
 """Default module locations decorator"""
-import logging
+
 from typing import Callable
 from pathlib import Path
 from functools import wraps

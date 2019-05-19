@@ -1,7 +1,11 @@
 # -*- coding: utf-8 -*-
 """Decorator for measuring execution time"""
 from functools import wraps
+from typing import Callable
+import time
+
 from {{ cookiecutter.slug_name }} import logger
+
 
 def timed_call() -> Callable:
     """Decorate a function measure execution time.
@@ -15,13 +19,13 @@ def timed_call() -> Callable:
         @wraps(function)
         def wrapper(*args, **kwargs):
 
-            ts = time.time()
+            start = time.time()
 
             result = function(*args, **kwargs)
 
-            te = time.time()
+            end = time.time()
 
-            logger.debug("%s exec time: %s.", function, te)
+            logger.debug("%s exec time: %s.", function, end-start)
 
             return result
 

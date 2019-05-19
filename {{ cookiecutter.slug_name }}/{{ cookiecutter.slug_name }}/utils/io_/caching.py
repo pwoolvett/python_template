@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 """Caching functions"""
+
 import pickle  # nosec
 from functools import wraps
 from typing import Callable
-import logging
 
 from pathlib import Path
 
