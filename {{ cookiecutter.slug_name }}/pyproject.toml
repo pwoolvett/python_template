@@ -30,12 +30,14 @@
   logzero = "^1.5"
   python-dotenv = "^0.10"
   pydantic = "^0.25"
-  {{- '\n  pandas = "^0.23.4"' if "pandas" in cookiecutter.additional_libs else '' -}}
+  unidecode = "^1.0"
+  {{- '\n  pandas = "^0.24"' if "pandas" in cookiecutter.additional_libs else '' -}}
   {{- '\n  tqdm = "^4.28"' if "tqdm" in cookiecutter.additional_libs else '' }}
 
 
 [tool.poetry.dev-dependencies]
   ipython = "^7.5"
+  {{- '\n  pandas = "^0.23"' if "pandas" not in cookiecutter.additional_libs else '' -}}
   {{- '\n  autopep8 = "^1.4"' if "autopep8" in cookiecutter.formatter else '' -}}
   {{- '\n  black = { version = "*", allows-prereleases = true }' if "black" in cookiecutter.formatter else '' -}}
 
