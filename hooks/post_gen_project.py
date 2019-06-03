@@ -76,7 +76,7 @@ def can_fail(function) -> callable:
     def wrapped(*a, **kw):
         try:
             return function(*a, **kw)
-        except Exception as err:
+        except BaseException as err:
             print(WARNING + str(err) + TERMINATOR)
             return 0
 
