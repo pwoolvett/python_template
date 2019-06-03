@@ -1,6 +1,6 @@
 from behave import given, when, then
 
-from {{ cookiecutter.slug_name }} import settings
+from {{ cookiecutter.slug_name }} import DOTENV_LOCATION
 
 
 @given("we have behave installed2")
@@ -20,4 +20,4 @@ def sample_assert(context):
 
 @then("behave will test it for us!2")
 def use_context_data(context):
-    assert 0, settings.DOTENV_LOCATION
+    assert DOTENV_LOCATION

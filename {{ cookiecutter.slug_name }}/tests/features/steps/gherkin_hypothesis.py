@@ -2,11 +2,14 @@ from behave import given, when, then
 from hypothesis import given as generate
 from hypothesis.strategies import floats
 
-# should import stuff from package
+# TODO: import package modules here
 
+SAFE_FLOATS = floats(
+    min_value=0, allow_infinity=False, allow_nan=False, max_value=1.34e+154
+)
 
 @given("we have a float number")
-@generate(floats())
+@generate(SAFE_FLOATS)
 def generate_float(context, flt):
     context.number = flt
 
