@@ -8,88 +8,38 @@ variables set in this file.
 
 Optionally, secret stuff is located in the a .env file, to be loaded here.
 """
-import os
-from pathlib import Path
 
-from {{ cookiecutter.slug_name }}._meta import LogLevel, LogMode, BaseConfig
+from petri import BaseSettings as PetriBaseSettings, LogMode, LogLevel
 
 
-class Config(BaseConfig):
-    """All common values are defined here"""
+class BaseSettings(PetriBaseSettings):
+    """Define project settings for {{ cookiecutter.slug_name }}.
 
-    BASEPATH: str = Path(__file__).parent.parent.as_posix()
-    """Absolute path to the project directory"""
+    Use pydantic style. Already included in `PetriBaseSettings`: ENV,
+    APP, BASEPATH, PKG_PATH, DATA, LOG_LEVEL, LOG_MODE, LOG_STORAGE
 
-    PKG_PATH: str = Path(BASEPATH).joinpath("{{ cookiecutter.slug_name }}").as_posix()
-    """Absolute path to the package directory"""
+    Of these, the following have defaults: APP, BASEPATH, PKG_PATH, 
+    DATA, LOG_STORAGE,
 
-    DATA: str = Path(BASEPATH).joinpath("data").as_posix()
-    """Absolute path to the package directory"""
+    This means `ENV` must be set in an env. var, and both LOG_LEVEL and 
+    LOG_MODE do not have defaults.
 
-    ENV: str
-    """Execution mode of the project
-
-    Must be one of: `production`, `development`, `testing`
     """
 
-    DEBUG: bool = True
-    """Set to True to enable debugging"""
 
-    TESTING: bool = False
-    """Set to True to enable testing mode"""
-
-    LOG_LEVEL: LogLevel = LogLevel.INFO
-    """Defines the logging level of the Application"""
-
-    LOG_MODE: LogMode = LogMode.CONSOLE | LogMode.ERROR_FILE
-    """Define allowed destinations for logs"""
-
-    LOG_STORAGE: str = Path(BASEPATH).joinpath("logs").as_posix()
-    """Where to store the log files if `LOG_MODE` uses any"""
-
-
-class ProductionConfig(Config):
-    """Production-specific values are defined here"""
-
+class ProdSettings(BaseSettings):
     ENV = "production"
-    DEBUG = False
-    TESTING = False
-
     LOG_LEVEL = LogLevel.TRACE
-    LOG_MODE = LogMode.ERROR_FILE | LogMode.TRACE_FILE
+    LOG_MODE = LogMode.ERROR_FILE
 
 
-class DevelopmentConfig(Config):
-    """Development-specific values are defined here"""
-
+class DevSettings(BaseSettings):
     ENV = "development"
-    DEBUG = True
-    TESTING = False
-
-    LOG_LEVEL = LogLevel.TRACE
+    LOG_LEVEL = LogLevel.INFO
     LOG_MODE = LogMode.CONSOLE | LogMode.ERROR_FILE
 
 
-class TestingConfig(Config):
-    """Testing-specific values are defined here"""
-
+class TestSettings(BaseSettings):
     ENV = "testing"
-    DEBUG = True
-    TESTING = True
-
-    LOG_LEVEL = LogLevel.TRACE
+    LOG_LEVEL = LogLevel.ERROR
     LOG_MODE = LogMode.CONSOLE
-
-
-def init_settings() -> "Config":
-    """Initializes configuration from envvar ´ENV´
-
-    Returns:
-        Config: A schema-validated configuration
-    """
-
-    env = os.environ["ENV"]
-
-    config = Config.from_env(env)
-
-    return config

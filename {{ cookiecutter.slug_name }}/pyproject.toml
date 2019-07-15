@@ -31,7 +31,8 @@
   python-dotenv = "^0.10"
   pydantic = "^0.25"
   unidecode = "^1.0"
-  {{- '\n  pandas = "^0.24"' if "pandas" in cookiecutter.additional_libs else '' -}}
+  petri = "^0.19"
+  {{- '\n  pandas = "^0.23.4"' if "pandas" in cookiecutter.additional_libs else '' -}}
   {{- '\n  tqdm = "^4.28"' if "tqdm" in cookiecutter.additional_libs else '' }}
 
 

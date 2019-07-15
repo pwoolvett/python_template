@@ -1,7 +1,6 @@
 {
   "project_name": null,
-  "app_name": "{{ cookiecutter.project_name|lower()|replace(' ', '_')|replace('-', '_')|replace('.', '_')|trim() }}",
-  "slug_name": "{{ cookiecutter.app_name }}",
+  "slug_name": "{{ cookiecutter.project_name|lower()|replace(' ', '_')|replace('-', '_')|replace('.', '_')|trim() }}",
   "python_version": "3.6",
   "version": "0.1.0",
   "release": "pre-alpha",
@@ -47,9 +46,9 @@
     "docker-compose"
   ],
   "testing": [
+    "pytest,coverage,pytest-coverage,hypothesis,behave",
     "pytest,coverage,pytest-coverage,hypothesis",
     "pytest,coverage,pytest-coverage",
-    "pytest,coverage,pytest-coverage,hypothesis,behave",
     "none"
   ],
   "docs": [
@@ -69,6 +68,7 @@
   ],
   "url": [
     "",
+    "{{ cookiecutter.repo }}",
     "http://{{ cookiecutter.github_username }}.github.io/{{ cookiecutter.slug_name }}"
   ],
   "default_env":[

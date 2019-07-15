@@ -5,15 +5,11 @@
    Initial version.
 
 """
+from petri import BaseSettings, initialize, LogMode, LogLevel
 
-from {{ cookiecutter.slug_name }}._meta import DOTENV_LOCATION, create_logger, Metadata
-from {{ cookiecutter.slug_name }}.settings import init_settings
-
-S = init_settings()
-__meta__ = Metadata()
-logger = create_logger(  # pylint: disable=invalid-name
-    S.LOG_LEVEL, S.LOG_MODE, logs_folder=S.LOG_STORAGE
+__meta__, DOTENV_LOCATION, SETTINGS, LOGGER, _ = initialize(
+    __file__, "{{ cookiecutter.slug_name }}"
 )
 
-logger.info("Using variables from `%s`", DOTENV_LOCATION)
-logger.debug("Full config :\n`%s`", S.to_str(compact=False, indent=2))
+LOGGER.info("Using variables from `%s`", DOTENV_LOCATION)
+LOGGER.debug("Full config :\n`%s`", SETTINGS.to_str(compact=False, indent=2))

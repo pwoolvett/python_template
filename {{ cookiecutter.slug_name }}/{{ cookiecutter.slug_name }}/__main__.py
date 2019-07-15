@@ -10,5 +10,6 @@ from {{ cookiecutter.slug_name }} import scripts
 def main():  # pylint: disable=missing-docstring
     _Fire_(scripts)
 
+
 if __name__ == "__main__":
     main()
