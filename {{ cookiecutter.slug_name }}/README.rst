@@ -33,7 +33,7 @@ Installation
 
 - User:
 
-   + Install {{ cookiecutter.app_name }} by running::
+   + Install {{ cookiecutter.project_name }} by running::
 
       $ poetry install --no-dev -v
 
@@ -42,7 +42,7 @@ Installation
 
 - Development:
 
-   + Create virtualenv and install install {{ cookiecutter.app_name }} (with
+   + Create virtualenv and install {{ cookiecutter.project_name }} (with
      development libs) by running::
 
       $ tox -e venv # internally this runs `poetry install -v`

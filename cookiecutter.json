@@ -67,7 +67,6 @@
     "git@github.com:{{ cookiecutter.github_username }}/{{ cookiecutter.slug_name }}.git"
   ],
   "url": [
-    "",
     "{{ cookiecutter.repo }}",
     "http://{{ cookiecutter.github_username }}.github.io/{{ cookiecutter.slug_name }}"
   ],
@@ -79,7 +78,6 @@
   "author_name": null,
   "author_mail": null,
   "author": "{{ cookiecutter.author_name }} <{{ cookiecutter.author_mail }}>",
-  "authors": "[{{ cookiecutter.author }},]",
   "maintainer": "{{ cookiecutter.author }}",
   "copyright": [
     "",

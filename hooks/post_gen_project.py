@@ -52,19 +52,17 @@ REPO = "{{ cookiecutter.repo }}"
 URL = "{{ cookiecutter.url }}"
 DEFAULT_ENV = "{{ cookiecutter.default_env }}"
 COPYRIGHT = "{{ cookiecutter.copyright }}"
-APP_NAME = "{{ cookiecutter.app_name }}"
 SLUG_NAME = "{{ cookiecutter.slug_name }}"
 PROJECT_SHORT_DESCRIPTION = "{{ cookiecutter.project_short_description }}"
 AUTHOR_NAME = "{{ cookiecutter.author_name }}"
 AUTHOR_MAIL = "{{ cookiecutter.author_mail }}"
 AUTHOR = "{{ cookiecutter.author }}"
-AUTHORS = "{{ cookiecutter.authors }}"
 MAINTAINER = "{{ cookiecutter.maintainer }}"
 
 
 def can_fail(function) -> callable:
     """Decorator to report exceptions instead of raising
-    
+
     Args:
         function (callable): the function to decorate.
     
@@ -78,7 +76,7 @@ def can_fail(function) -> callable:
             return function(*a, **kw)
         except BaseException as err:
             print(WARNING + str(err) + TERMINATOR)
-            return 0
+            return 1
 
     return wrapped
 

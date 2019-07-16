@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 """Custom Python extensions and classes"""
 
+
 class Singleton(type):
     """"A metaclass to equip singleton-like behavior."""
 

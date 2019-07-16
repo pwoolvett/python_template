@@ -49,13 +49,11 @@ REPO = "{{ cookiecutter.repo }}"
 URL = "{{ cookiecutter.url }}"
 DEFAULT_ENV = "{{ cookiecutter.default_env }}"
 COPYRIGHT = "{{ cookiecutter.copyright }}"
-APP_NAME = "{{ cookiecutter.app_name }}"
 SLUG_NAME = "{{ cookiecutter.slug_name }}"
 PROJECT_SHORT_DESCRIPTION = "{{ cookiecutter.project_short_description }}"
 AUTHOR_NAME = "{{ cookiecutter.author_name }}"
 AUTHOR_MAIL = "{{ cookiecutter.author_mail }}"
 AUTHOR = "{{ cookiecutter.author }}"
-AUTHORS = "{{ cookiecutter.authors }}"
 MAINTAINER = "{{ cookiecutter.maintainer }}"
 
 

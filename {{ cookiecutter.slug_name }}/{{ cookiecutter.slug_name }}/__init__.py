@@ -5,7 +5,10 @@
    Initial version.
 
 """
+
 from petri import BaseSettings, initialize, LogMode, LogLevel
+
+from . import settings
 
 __meta__, DOTENV_LOCATION, SETTINGS, LOGGER, _ = initialize(
     __file__, "{{ cookiecutter.slug_name }}"

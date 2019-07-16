@@ -1,24 +1,71 @@
-{{ "[tool.black]\nline-length = "+cookiecutter.max_line_length+"\ntarget-version = ['py37']\n\n" if "black" in cookiecutter.formatter else '' -}}
+
+{%- macro maybe(condition, text) -%}
+  {%- if condition -%}
+  {{- text -}}
+  {%- endif -%}
+{%- endmacro -%}
+
+{%- macro section(title, condition, content) -%}
+{%- if condition -%}
+[{{- title -}}]
+{% for key,value in content.items() -%}
+{%- if value -%}
+  {{ key }} = {{ value }}
+  {{- '\n' -}}
+{%- endif -%}
+{% endfor %}
+{%- endif -%}
+
+{{- "\n\n" -}}
 {{- '' -}}
-[tool.poetry]
-  project_name = "{{ cookiecutter.project_name }}"
-  name = "{{ cookiecutter.slug_name }}"
-  version = "{{ cookiecutter.version }}"
-  release = "{{ cookiecutter.release }}"
-  description = "{{ cookiecutter.description }}"
-  readme = "README.rst"
-  author = "{{ cookiecutter.author_name }} <{{ cookiecutter.author_mail }}>"
-  authors = [
-    "{{ cookiecutter.author }}"
-  ]
-  maintainer = "{{ cookiecutter.author_name }} <{{ cookiecutter.author_mail }}>"
-  {{- '\n  license = '+ cookiecutter.license if cookiecutter.license != "none" else '' -}}
-  {{- '\n  copyright = '+cookiecutter.copyright if cookiecutter.copyright != "" else '' -}}
-  {{- '\n  url = '+cookiecutter.url if cookiecutter.url != "" else '' }}
+{%- endmacro -%}
+
+{%- set data =  -%}
+{{- section(
+      "tool.black",
+      "black" in cookiecutter.formatter, 
+      {
+        "line-length": '"{}"'.format(cookiecutter.max_line_length),
+        "target-version": "['py37']"
+      }
+    )
+ -}}
+
+{%- set data = {
+  "project_name": '"{}"'.format(cookiecutter.project_name),
+  "maintainer": '"{} <{}>"'.format(cookiecutter.author_name,cookiecutter.author_mail),
+  "release": '"{}"'.format(cookiecutter.release),
+  "url": '"{}"'.format(cookiecutter.url) if cookiecutter.url != "" else '',
+  "copyright": '"{}"'.format(cookiecutter.copyright) if cookiecutter.copyright != "" else '',
+  "license": '"{}"'.format(cookiecutter.license) if cookiecutter.license != "none" else '',
+} -%}
+{{- section("tool.meta", true, data) -}}
+
+{%- set data = {
+  "name": '"{}"'.format(cookiecutter.slug_name),
+  "version": '"{}"'.format(cookiecutter.version),
+  "description": '"{}"'.format(cookiecutter.description),
+  "readme": '"README.rst"',
+  "authors": '["{}"]'.format(cookiecutter.author),
+} -%}
+{{- section("tool.poetry", true, data) -}}
 
 
-[tool.poetry.scripts]
-  {{ cookiecutter.slug_name }} = "{{ cookiecutter.slug_name }}.__main__:main"
+{%- set data = {
+  "python": '"^{}"'.format(cookiecutter.python_version),
+  "pip": '"19.1.1"',
+  "fire": '"^0.1.3"',
+  "tzlocal":'"^1.5"',
+  "jsonschema":'"^3.0"',
+  "autologging":'"^1.3"',
+  "logzero":'"^1.5"',
+  "pydantic":'"^0"',
+  "petri":'"0.19"',
+  "python-dotenv":'"^0.10"',
+  "pandas": '"^0.23.4"' if "pandas" in cookiecutter.additional_libs else '',
+  "tqdm": '"^4.28"' if "tqdm" in cookiecutter.additional_libs else '',
+} -%}
+{{- section("tool.poetry.dependencies", true, data) -}}
 
 [tool.poetry.dependencies]
   python = "^{{ cookiecutter.python_version }}"
@@ -34,33 +81,41 @@
   petri = "^0.19"
   {{- '\n  pandas = "^0.23.4"' if "pandas" in cookiecutter.additional_libs else '' -}}
   {{- '\n  tqdm = "^4.28"' if "tqdm" in cookiecutter.additional_libs else '' }}
+  
 
-
+{%- set data = {
+  "ipython": '"^7.5"',
+  "autopep8": '"^1.4"' if "autopep8" in cookiecutter.formatter else '',
+  "black": '"^19.3b0"' if "black" in cookiecutter.formatter else '',
+  "pylint": '"^2.3"' if "pylint" in cookiecutter.linter else '',
+  "flake8": '"^3.7"' if "flake8" in cookiecutter.linter else '',
+  "flake8-bugbear": '"^19.3"' if "flake8" in cookiecutter.linter else '',
+  "mypy": '"^0.701"' if "mypy" in cookiecutter.linter else '',
+  "mypy-extensions": '"^0.4"' if "mypy" in cookiecutter.linter else '',
+  "bandit": '"^1.5"' if "bandit" in cookiecutter.linter else '',
+  "pytest": '"^4.0"' if "pytest" in cookiecutter.testing else '',
+  "coverage": '"^4.5"' if "coverage" in cookiecutter.testing else '',
+  "pytest-cov": '"^2.6"' if "pytest" in cookiecutter.testing and "coverage" in cookiecutter.testing else '',
+  "hypothesis": '"^4.17"' if "hypothesis" in cookiecutter.testing else '',
+  "behave": '"^1.2"' if "behave" in cookiecutter.testing else '',
+  "Sphinx": '"^1.8"' if "sphinx" in cookiecutter.docs else '',
+  '"sphinxcontrib.apidoc"': '"^0.3.0"' if "sphinx" in cookiecutter.docs else '',
+  "doc8": '"^0.8"' if "sphinx" in cookiecutter.docs else '',
+  "sphinx_rtd_theme": '"^0.4.2"' if "rtd" in cookiecutter.docs else '',
+  "sphinx-autodoc-typehints": '"^1.5"' if "autodoc" in cookiecutter.docs else '',
+} -%}
+{{- section("tool.poetry.dev-dependencies", true, data) -}}
 [tool.poetry.dev-dependencies]
   ipython = "^7.5"
   {{- '\n  pandas = "^0.23"' if "pandas" not in cookiecutter.additional_libs else '' -}}
   {{- '\n  autopep8 = "^1.4"' if "autopep8" in cookiecutter.formatter else '' -}}
   {{- '\n  black = { version = "*", allows-prereleases = true }' if "black" in cookiecutter.formatter else '' -}}
 
-  {{- '\n  pylint = "^2.3"' if "pylint" in cookiecutter.linter else '' -}}
-  {{- '\n  flake8 = "^3.7"\n  flake8-bugbear = "^19.3"' if "flake8" in cookiecutter.linter else '' -}}
-  {{- '\n  mypy = "^0.701"\n  mypy-extensions = "^0.4"' if "mypy" in cookiecutter.linter else '' -}}
-  {{- '\n  bandit = "^1.5"' if "bandit" in cookiecutter.linter else '' -}}
-
-  {{- '\n  pytest = "^4.0"' if "pytest" in cookiecutter.testing else '' -}}
-  {{- '\n  coverage = "^4.5"' if "coverage" in cookiecutter.testing else '' -}}
-  {{- '\n  pytest-cov = "^2.6"' if "pytest" in cookiecutter.testing and "coverage" in cookiecutter.testing else '' -}}
-  {{- '\n  hypothesis = "^4.17"' if "hypothesis" in cookiecutter.testing else '' -}}
-  {{- '\n  behave = "^1.2"' if "behave" in cookiecutter.testing else '' -}}
-
-  {{- '\n  Sphinx = "^1.8"' if "sphinx" in cookiecutter.docs else '' -}}
-  {{- '\n  doc8 = "^0.8"' if "sphinx" in cookiecutter.docs else '' -}}
-  {{- '\n  sphinx_rtd_theme = "^0.4.2"' if "rtd" in cookiecutter.docs else '' -}}
-  {{- '\n  sphinx-autodoc-typehints = "^1.5"' if "autodoc" in cookiecutter.docs else '' }}
-
-[tool.settings-schema]
-  schema = "http://json-schema.org/draft-07/schema#"
+{%- set data = {
+  cookiecutter.slug_name: '"{}.__main__:main"'.format(cookiecutter.slug_name),
+} -%}
+{{- section("tool.poetry.scripts", true, data) -}}
 
 [build-system]
-  requires = ["poetry>=0.12", "pip<=19.0.3"]{# pip 19.1 (2019-04-23) breaks editable installs with pyproject.toml #}
+  requires = ["poetry>=1.0.0a4", "pip>=19.1.1"]
   build-backend = "poetry.masonry.api"
