@@ -281,10 +281,10 @@ def main():
     config_docker()
     config_tests()
     config_docs()
-    configure_git()
-    create_virtualenv()
-    update_dependencies()
-    run_tests()
+    # configure_git()
+    # create_virtualenv()
+    # update_dependencies()
+    # run_tests()
 
     print(SUCCESS + "Project initialized, keep up the good work!" + TERMINATOR)
 

@@ -20,102 +20,100 @@
 {{- '' -}}
 {%- endmacro -%}
 
-{%- set data =  -%}
+{{- section(
+      "tool.meta",
+      true,
+      {
+        "project_name": '"{}"'.format(cookiecutter.project_name),
+        "maintainer": '"{} <{}>"'.format(cookiecutter.author_name,cookiecutter.author_mail),
+        "release": '"{}"'.format(cookiecutter.release),
+        "url": '"{}"'.format(cookiecutter.url) if cookiecutter.url != "" else '',
+        "copyright": '"{}"'.format(cookiecutter.copyright) if cookiecutter.copyright != "" else '',
+        "license": '"{}"'.format(cookiecutter.license) if cookiecutter.license != "none" else '',
+      }
+    )
+-}}
+
+{{- section(
+      "tool.poetry",
+      true,
+      {
+        "name": '"{}"'.format(cookiecutter.slug_name),
+        "version": '"{}"'.format(cookiecutter.version),
+        "description": '"{}"'.format(cookiecutter.description),
+        "readme": '"README.rst"',
+        "authors": '["{}"]'.format(cookiecutter.author),
+      }
+    )
+-}}
+
+{{- section(
+      "tool.poetry.dependencies",
+      true,
+      {
+        "python": '"^{}"'.format(cookiecutter.python_version),
+        "pip": '"19.1.1"',
+        "fire": '"^0.1.3"',
+        "tzlocal":'"^1.5"',
+        "autologging":'"^1.3"',
+        "logzero":'"^1.5"',
+        "pydantic":'"^0"',
+        "petri":'"0.19"',
+        "unidecode":'"^1.0"',
+        "python-dotenv":'"^0.10"',
+        "pandas": '"^0.24"' if "pandas" in cookiecutter.additional_libs else '',
+        "tqdm": '"^4.28"' if "tqdm" in cookiecutter.additional_libs else '',
+      }
+    )
+-}}
+
+
+{{- section(
+      "tool.poetry.dev-dependencies",
+      true,
+      {
+        "ipython": '"^7.5"',
+        "autopep8": '"^1.4"' if "autopep8" in cookiecutter.formatter else '',
+        "black": '"^19.3b0"' if "black" in cookiecutter.formatter else '',
+        "pylint": '"^2.3"' if "pylint" in cookiecutter.linter else '',
+        "flake8": '"^3.7"' if "flake8" in cookiecutter.linter else '',
+        "flake8-bugbear": '"^19.3"' if "flake8" in cookiecutter.linter else '',
+        "mypy": '"^0.701"' if "mypy" in cookiecutter.linter else '',
+        "mypy-extensions": '"^0.4"' if "mypy" in cookiecutter.linter else '',
+        "bandit": '"^1.5"' if "bandit" in cookiecutter.linter else '',
+        "pytest": '"^4.0"' if "pytest" in cookiecutter.testing else '',
+        "coverage": '"^4.5"' if "coverage" in cookiecutter.testing else '',
+        "pytest-cov": '"^2.6"' if "pytest" in cookiecutter.testing and "coverage" in cookiecutter.testing else '',
+        "hypothesis": '"^4.17"' if "hypothesis" in cookiecutter.testing else '',
+        "behave": '"^1.2"' if "behave" in cookiecutter.testing else '',
+        "Sphinx": '"^1.8"' if "sphinx" in cookiecutter.docs else '',
+        '"sphinxcontrib.apidoc"': '"^0.3.0"' if "sphinx" in cookiecutter.docs else '',
+        "doc8": '"^0.8"' if "sphinx" in cookiecutter.docs else '',
+        "sphinx_rtd_theme": '"^0.4.2"' if "rtd" in cookiecutter.docs else '',
+        "sphinx-autodoc-typehints": '"^1.5"' if "autodoc" in cookiecutter.docs else '',
+      }
+    )
+-}}
+
+{{- section(
+      "tool.poetry.scripts",
+      true,
+      {
+        cookiecutter.slug_name: '"{}.__main__:main"'.format(cookiecutter.slug_name),
+      }
+    )
+-}}
+
 {{- section(
       "tool.black",
       "black" in cookiecutter.formatter, 
       {
-        "line-length": '"{}"'.format(cookiecutter.max_line_length),
+        "line-length": cookiecutter.max_line_length,
         "target-version": "['py37']"
       }
     )
  -}}
 
-{%- set data = {
-  "project_name": '"{}"'.format(cookiecutter.project_name),
-  "maintainer": '"{} <{}>"'.format(cookiecutter.author_name,cookiecutter.author_mail),
-  "release": '"{}"'.format(cookiecutter.release),
-  "url": '"{}"'.format(cookiecutter.url) if cookiecutter.url != "" else '',
-  "copyright": '"{}"'.format(cookiecutter.copyright) if cookiecutter.copyright != "" else '',
-  "license": '"{}"'.format(cookiecutter.license) if cookiecutter.license != "none" else '',
-} -%}
-{{- section("tool.meta", true, data) -}}
-
-{%- set data = {
-  "name": '"{}"'.format(cookiecutter.slug_name),
-  "version": '"{}"'.format(cookiecutter.version),
-  "description": '"{}"'.format(cookiecutter.description),
-  "readme": '"README.rst"',
-  "authors": '["{}"]'.format(cookiecutter.author),
-} -%}
-{{- section("tool.poetry", true, data) -}}
-
-
-{%- set data = {
-  "python": '"^{}"'.format(cookiecutter.python_version),
-  "pip": '"19.1.1"',
-  "fire": '"^0.1.3"',
-  "tzlocal":'"^1.5"',
-  "jsonschema":'"^3.0"',
-  "autologging":'"^1.3"',
-  "logzero":'"^1.5"',
-  "pydantic":'"^0"',
-  "petri":'"0.19"',
-  "python-dotenv":'"^0.10"',
-  "pandas": '"^0.23.4"' if "pandas" in cookiecutter.additional_libs else '',
-  "tqdm": '"^4.28"' if "tqdm" in cookiecutter.additional_libs else '',
-} -%}
-{{- section("tool.poetry.dependencies", true, data) -}}
-
-[tool.poetry.dependencies]
-  python = "^{{ cookiecutter.python_version }}"
-  pip = "19.0.3"
-  fire = "^0.1.3"
-  tzlocal = "^1.5"
-  jsonschema = "^3.0"
-  autologging = "^1.3"
-  logzero = "^1.5"
-  python-dotenv = "^0.10"
-  pydantic = "^0.25"
-  unidecode = "^1.0"
-  petri = "^0.19"
-  {{- '\n  pandas = "^0.23.4"' if "pandas" in cookiecutter.additional_libs else '' -}}
-  {{- '\n  tqdm = "^4.28"' if "tqdm" in cookiecutter.additional_libs else '' }}
-  
-
-{%- set data = {
-  "ipython": '"^7.5"',
-  "autopep8": '"^1.4"' if "autopep8" in cookiecutter.formatter else '',
-  "black": '"^19.3b0"' if "black" in cookiecutter.formatter else '',
-  "pylint": '"^2.3"' if "pylint" in cookiecutter.linter else '',
-  "flake8": '"^3.7"' if "flake8" in cookiecutter.linter else '',
-  "flake8-bugbear": '"^19.3"' if "flake8" in cookiecutter.linter else '',
-  "mypy": '"^0.701"' if "mypy" in cookiecutter.linter else '',
-  "mypy-extensions": '"^0.4"' if "mypy" in cookiecutter.linter else '',
-  "bandit": '"^1.5"' if "bandit" in cookiecutter.linter else '',
-  "pytest": '"^4.0"' if "pytest" in cookiecutter.testing else '',
-  "coverage": '"^4.5"' if "coverage" in cookiecutter.testing else '',
-  "pytest-cov": '"^2.6"' if "pytest" in cookiecutter.testing and "coverage" in cookiecutter.testing else '',
-  "hypothesis": '"^4.17"' if "hypothesis" in cookiecutter.testing else '',
-  "behave": '"^1.2"' if "behave" in cookiecutter.testing else '',
-  "Sphinx": '"^1.8"' if "sphinx" in cookiecutter.docs else '',
-  '"sphinxcontrib.apidoc"': '"^0.3.0"' if "sphinx" in cookiecutter.docs else '',
-  "doc8": '"^0.8"' if "sphinx" in cookiecutter.docs else '',
-  "sphinx_rtd_theme": '"^0.4.2"' if "rtd" in cookiecutter.docs else '',
-  "sphinx-autodoc-typehints": '"^1.5"' if "autodoc" in cookiecutter.docs else '',
-} -%}
-{{- section("tool.poetry.dev-dependencies", true, data) -}}
-[tool.poetry.dev-dependencies]
-  ipython = "^7.5"
-  {{- '\n  pandas = "^0.23"' if "pandas" not in cookiecutter.additional_libs else '' -}}
-  {{- '\n  autopep8 = "^1.4"' if "autopep8" in cookiecutter.formatter else '' -}}
-  {{- '\n  black = { version = "*", allows-prereleases = true }' if "black" in cookiecutter.formatter else '' -}}
-
-{%- set data = {
-  cookiecutter.slug_name: '"{}.__main__:main"'.format(cookiecutter.slug_name),
-} -%}
-{{- section("tool.poetry.scripts", true, data) -}}
-
 [build-system]
-  requires = ["poetry>=1.0.0a4", "pip>=19.1.1"]
-  build-backend = "poetry.masonry.api"
+requires = ["poetry>=1.0.0a4", "pip>=19.1.1"]
+build-backend = "poetry.masonry.api"
