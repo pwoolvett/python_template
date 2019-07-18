@@ -196,7 +196,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, '{{ cookiecutter.slug_name }}.tex', '{{ cookiecutter.name }} Documentation',
+    (master_doc, f'{{ cookiecutter.slug_name }}.tex', f'{project} Documentation',
      author, 'manual'),
 ]
 
@@ -206,7 +206,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, '{{ cookiecutter.slug_name }}', '{{ cookiecutter.name }} Documentation',
+    (master_doc, '{{ cookiecutter.slug_name }}', f'{project} Documentation',
      [author], 1)
 ]
 
