@@ -1,20 +1,20 @@
-"""Default module locations decorator"""
+"""Default module locations decorator."""
 
 from typing import Callable
 from pathlib import Path
 from functools import wraps
 
-from {{ cookiecutter.slug_name }} import logger
+from {{ cookiecutter.slug_name }} import LOGGER
 
 
 def get_file_path(func_name, locations, **kwargs):
-    """defines a default file location"""
+    """Define a default file location."""
     if "file_path" in kwargs:
-        logger.debug("file_path %s in kwargs", kwargs["file_path"])
+        LOGGER.debug("file_path %s in kwargs", kwargs["file_path"])
     else:
 
         for default_location in locations:
-            logger.info(
+            LOGGER.info(
                 "Added `file_path=%s` to kwargs in `%s` call",
                 default_location,
                 func_name,
@@ -39,19 +39,16 @@ def requires_file(locations: tuple) -> Callable:
         locations (tuple): Where to look for the files.
 
     Returns:
-        Callable: The original function, with two extra arguments.
+        The original function, with two extra arguments.
+
     """
 
     def real_decorator(function):
         @wraps(function)
-        def wrapper(
-            *args, __locations__=locations, **kwargs
-        ):
+        def wrapper(*args, __locations__=locations, **kwargs):
 
             kwargs.update(
-                **get_file_path(
-                    function.__name__, __locations__, **kwargs
-                )
+                **get_file_path(function.__name__, __locations__, **kwargs)
             )
 
             result = function(*args, **kwargs)

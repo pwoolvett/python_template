@@ -1,2 +1,2 @@
 # -*- coding: utf-8 -*-
-"""Several io-related utilities"""
+"""Several io-related utilities."""

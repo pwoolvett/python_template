@@ -1,6 +1,6 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
-"""Entrypoints for {{ cookiecutter.slug_name }}"""
+"""Entrypoints for {{ cookiecutter.slug_name }}."""
 
 from fire import Fire as _Fire_
 

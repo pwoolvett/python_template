@@ -1,2 +1,2 @@
 # -*- coding: utf-8 -*-
-"""Text processing utilities"""
+"""Text processing utilities."""

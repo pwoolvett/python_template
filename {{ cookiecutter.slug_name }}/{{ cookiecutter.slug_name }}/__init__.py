@@ -1,7 +1,8 @@
 # coding=utf-8
-"""{{ cookiecutter.slug_name }} documentation
+"""{{ cookiecutter.project_name }} documentation.
 
 .. versionadded:: {{ cookiecutter.version }}
+
    Initial version.
 
 """

@@ -211,6 +211,16 @@ def config_docs():
     print(SUCCESS + "Documentation setup completed" + TERMINATOR)
 
 
+def config_libs():
+    """Sets up libraries-specific code, if required"""
+
+    print(INFO + "Setting up libraries" + TERMINATOR)
+
+    if "pandas" not in ADDITIONAL_LIBS:
+        _delete_or_raise(f"{SLUG_NAME}/utils/io_/pandas_.py")
+
+    print(SUCCESS + "Documentation setup completed" + TERMINATOR)
+
 def configure_git():
     """Configures or deletes git+github stuff"""
 
@@ -281,10 +291,11 @@ def main():
     config_docker()
     config_tests()
     config_docs()
-    # configure_git()
-    # create_virtualenv()
-    # update_dependencies()
-    # run_tests()
+    config_libs()
+    configure_git()
+    create_virtualenv()
+    update_dependencies()
+    run_tests()
 
     print(SUCCESS + "Project initialized, keep up the good work!" + TERMINATOR)
 

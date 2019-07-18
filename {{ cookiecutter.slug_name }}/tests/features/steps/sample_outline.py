@@ -7,7 +7,7 @@ def behave_installed(context):
     context.dep2name = defaultdict(list)
 
     for row in context.table:
-        context.dep2name[row['department']].append(row['name'])
+        context.dep2name[row["department"]].append(row["name"])
 
 
 @when("we count the number of people in each department")
@@ -18,6 +18,6 @@ def feature_loaded(context):
     }
 
 
-@then('we will find {count} people in {department}')
+@then("we will find {count} people in {department}")
 def use_context_data(context, count, department):
     assert context.counts[department] == int(count)

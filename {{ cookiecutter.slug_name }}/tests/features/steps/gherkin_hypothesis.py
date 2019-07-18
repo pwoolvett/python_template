@@ -5,8 +5,9 @@ from hypothesis.strategies import floats
 # TODO: import package modules here
 
 SAFE_FLOATS = floats(
-    min_value=0, allow_infinity=False, allow_nan=False, max_value=1.34e+154
+    min_value=0, allow_infinity=False, allow_nan=False, max_value=1.34e154
 )
+
 
 @given("we have a float number")
 @generate(SAFE_FLOATS)

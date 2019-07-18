@@ -26,7 +26,7 @@
     "UTC"
   ],
   "formatter": [
-    "isort,autopep8,black",
+    "isort,autopep8,black,docformatter",
     "isort,black",
     "isort,autopep8",
     "none"

@@ -1,2 +1,3 @@
-from tests import define_test_dotenv  # make sure we use the right dotenv file # noqa: F401
+from tests import define_test_dotenv  # enforce tests' dotenv file
+
 define_test_dotenv()

@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
-"""Custom Python extensions and classes"""
+"""Custom Python extensions and classes."""
 
 
 class Singleton(type):
     """"A metaclass to equip singleton-like behavior."""
 
-    _storage = {}
+    _storage: dict = {}
     """singleton classes global storage"""
 
     def __call__(cls, *args, **kwargs):

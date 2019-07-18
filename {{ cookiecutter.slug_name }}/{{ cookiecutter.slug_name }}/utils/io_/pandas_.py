@@ -6,7 +6,7 @@ from pathlib import Path
 from autologging import traced
 import pandas as pd
 
-from {{ cookiecutter.slug_name }} import logger
+from {{ cookiecutter.slug_name }} import LOGGER
 
 
 def tsv_reader(*args, **kwargs) -> Callable:
@@ -19,7 +19,7 @@ def tsv_reader(*args, **kwargs) -> Callable:
     return pd.read_csv(*args, sep="\t", **kwargs)
 
 
-@traced(logger)
+@traced(LOGGER)
 def get_reader(file_path: str) -> Callable:
     """Selects a pandas excel/csv reader depending on file extension
 

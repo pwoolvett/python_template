@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Common functions and utilities"""
+"""Common functions and utilities."""
 
 from .io_.path_ import nth_parent
 from .io_.caching import cached_output

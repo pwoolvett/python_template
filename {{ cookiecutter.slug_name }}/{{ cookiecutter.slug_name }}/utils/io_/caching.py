@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Caching functions"""
+"""Caching functions."""
 
 import pickle  # nosec
 from functools import wraps
@@ -7,36 +7,36 @@ from typing import Callable
 
 from pathlib import Path
 
-from {{ cookiecutter.slug_name }} import logger
+from {{ cookiecutter.slug_name }} import LOGGER
 
 PICKLE_EXTENSIONS = {".pickle", ".pkl"}
 
 
 def define_save_load(location):
-    """Save and load are noops if location is not pickle"""
+    """Save and load are noops if location is not pickle."""
 
     if any(location.endswith(ext) for ext in PICKLE_EXTENSIONS):
 
         def save(location_, result_):
             with open(location_, "wb") as pkl:
                 pickle.dump(result_, pkl)
-            logger.info("%s Saved", location)
+            LOGGER.info("%s Saved", location)
 
         def load(location_,):
             with open(location_, "rb") as pkl:
                 result = pickle.load(pkl)  # nosec
-            logger.info("%s Loaded", location_)
+            LOGGER.info("%s Loaded", location_)
             return result
 
     else:
 
         def save(location_, result_):  # pylint: disable=unused-argument,
-            logger.info(
+            LOGGER.info(
                 "%s without pickle extension. Skipping Saving", location_
             )
 
         def load(location_):
-            logger.info(
+            LOGGER.info(
                 "%s Already exists without pickle ext. Skipping Loading",
                 location_,
             )
@@ -60,12 +60,7 @@ def cached_output(location: str, force: bool = False) -> Callable:
 
     def real_decorator(function):
         @wraps(function)
-        def wrapper(
-            *args,
-            __location__=location,
-            __force__=force,
-            **kwargs,
-        ):
+        def wrapper(*args, __location__=location, __force__=force, **kwargs,):
 
             save, load = define_save_load(__location__)
 
@@ -77,7 +72,7 @@ def cached_output(location: str, force: bool = False) -> Callable:
                     result = load(__location__)
 
                 except (EOFError, pickle.UnpicklingError) as error:
-                    logger.error(
+                    LOGGER.error(
                         "Error %s in %s. Calling again ...",
                         type(error),
                         __location__,

@@ -51,12 +51,12 @@ def test_log(monkeypatch, caplog):
         patcher.setitem(os.environ, "LOG_STORAGE", "test_log")
         import {{ cookiecutter.slug_name }}  # noqa: F401
 
-        {{ cookiecutter.slug_name }}.logger.info(info_)
-        {{ cookiecutter.slug_name }}.logger.error(error_)
+        {{ cookiecutter.slug_name }}.LOGGER.info(info_)
+        {{ cookiecutter.slug_name }}.LOGGER.error(error_)
 
         logfiles = [
             handler.stream.buffer.name
-            for handler in {{ cookiecutter.slug_name }}.logger.handlers
+            for handler in {{ cookiecutter.slug_name }}.LOGGER.handlers
             if isinstance(handler, logging.handlers.RotatingFileHandler)
         ]
 

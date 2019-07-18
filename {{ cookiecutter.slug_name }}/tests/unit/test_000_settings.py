@@ -28,7 +28,7 @@ def setup_function():
     ],
 )
 def test_environment(monkeypatch, varname, varval, err_cls):
-    
+
     with monkeypatch.context() as patcher, pytest.raises(err_cls):
         patcher.setitem(os.environ, varname, varval)
         print(f"\nDOTENV_LOCATION: {os.environ['DOTENV_LOCATION']}")

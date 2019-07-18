@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
-"""Text preprocessing utilities"""
+"""Text preprocessing utilities."""
 
 import re
+from typing import Optional
 
 import unidecode
 
@@ -13,7 +14,9 @@ SPACER = re.compile(r"\s+")
 
 
 class Cleaner(metaclass=Singleton):
-    """Clean text"""
+    """Clean text."""
+
+    _cleaner: Optional["Cleaner"] = None
 
     def __init__(self, first_letter=False):
         self._pascaler = None
@@ -31,23 +34,8 @@ class Cleaner(metaclass=Singleton):
             self._snaker = Snake2Pascal(first_letter=self.first_letter)
 
     def _clean_str(
-        self,
-        dirty: str,
-        lower=True,
-        strip=True,
-        formatter="snake"
+        self, dirty: str, lower=True, strip=True, formatter="snake"
     ) -> str:
-        """Cleans a string to utf8 with only alphanumeric
-
-        Args:
-            dirty: A dirty string
-            lower: Wheter to lowercase.
-            strip: Wheter to strip leading & trailing spaces.
-            format: Final formatting option .
-
-        Returns:
-            The processed version
-        """
         english = unidecode.unidecode(dirty)
 
         lowered = english.lower() if lower else english
@@ -62,8 +50,26 @@ class Cleaner(metaclass=Singleton):
         return alphanumeric
 
     @classmethod
-    def clean_str(cls, dirty:str):
-        cleaner = cls()
+    def clean_str(cls, dirty: str, **kw):
+        """Clean string to utf8, alphanumeric, lowercase, snake/Pascal.
+
+        Args:
+            dirty: A dirty string
+
+        Kwargs:
+            lower: Wheter to lowercase.
+            strip: Wheter to strip leading & trailing spaces.
+            format: Final formatting option .
+
+        Returns:
+            The processed version.
+
+        """
+        if not cls._cleaner:
+            cls._cleaner = cls()
+        return cls._cleaner._clean_str(  # pylint: disable=protected-access
+            dirty, **kw
+        )
 
 
 clean_str = Cleaner.clean_str  # pylint: disable=invalid-name

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Several path-related utilities"""
+"""Several path-related utilities."""
 
 from pathlib import Path
 from typing import Union
@@ -13,8 +13,9 @@ def nth_parent(src: Union[str, Path], n_times: int = 1) -> Path:
         n_times (int, optional): How many parents to walkt to. Defaults to 1.
 
     Returns:
-        Path: the n-th ancestor to path (or the root folder if
-        the hierarchy tree is smaller than `n_times`).
+        The n-th ancestor to path (or the root folder if the hierarchy
+            tree is smaller than `n_times`).
+
     """
     if n_times == 0:
         return src.resolve()  # type: ignore
