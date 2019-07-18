@@ -207,6 +207,7 @@ def config_docs():
 
     if DOCS in NO:
         _delete_or_raise("docs")
+        _delete_or_raise(".readthedocs.yml")
 
     print(SUCCESS + "Documentation setup completed" + TERMINATOR)
 
@@ -220,6 +221,7 @@ def config_libs():
         _delete_or_raise(f"{SLUG_NAME}/utils/io_/pandas_.py")
 
     print(SUCCESS + "Documentation setup completed" + TERMINATOR)
+
 
 def configure_git():
     """Configures or deletes git+github stuff"""
