@@ -1,6 +1,7 @@
 from behave import given, when, then
 from collections import defaultdict
 
+
 @given("a set of specific users")
 def behave_installed(context):
 
@@ -13,8 +14,7 @@ def behave_installed(context):
 @when("we count the number of people in each department")
 def feature_loaded(context):
     context.counts = {
-        dep: len(names)
-        for dep, names in context.dep2name.items()
+        dep: len(names) for dep, names in context.dep2name.items()
     }
 
 

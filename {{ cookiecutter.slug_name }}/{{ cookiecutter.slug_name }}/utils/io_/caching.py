@@ -55,12 +55,13 @@ def cached_output(location: str, force: bool = False) -> Callable:
         cached result already exists. Defaults to False.
 
     Returns:
-        Callable: The original function, with two extra arguments
+        The original function, with two extra arguments
+
     """
 
     def real_decorator(function):
         @wraps(function)
-        def wrapper(*args, __location__=location, __force__=force, **kwargs,):
+        def wrapper(*args, __location__=location, __force__=force, **kwargs):
 
             save, load = define_save_load(__location__)
 
